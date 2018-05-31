@@ -1,0 +1,46 @@
+{
+  "name": "react-ssr",
+  "version": "1.0.0",
+  "description": "ssr for react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "build:client:dev": "cross-env NODE_ENV=development webpack --config webpack/client/index.js",
+    "build:client:prod": "cross-env NODE_ENV=production webpack -p --config webpack/client/index.js",
+    "build:server:dev": "cross-env NODE_ENV=development webpack --config webpack/server/index.js",
+    "build:server:prod": "cross-env NODE_ENV=production webpack -p --config webpack/server/index.js",
+    "start:spa:server": "http-server-spa dist"
+  },
+  "keywords": [
+    "react",
+    "ssr",
+    "graphql"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-universal-component": "^2.9.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-flush-chunks": "^1.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "colors": "^1.3.0",
+    "cross-env": "^5.1.6",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server-spa": "^1.2.0",
+    "rimraf": "^2.6.2",
+    "webpack": "3.12.0",
+    "webpack-merge": "^4.1.2",
+    "webpack-stats-plugin": "^0.2.1"
+  }
+}
