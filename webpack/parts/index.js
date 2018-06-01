@@ -19,6 +19,7 @@ exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
   if (target === 'client') {
     targetOutput = Object.assign({}, baseOutput, {
       publicPath: '/',
+      chunkFilename: `[name].${placeholder}.js`,
     });
   }
 
