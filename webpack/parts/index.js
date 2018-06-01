@@ -3,13 +3,33 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 
-exports.output = (placeholder = '[hash]', folder = '') => ({
-  output: {
+exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
+  const isValidTarget = target === 'client' || target === 'server';
+
+  if (!isValidTarget) {
+    throw new Error('webpack output target is not valid, see webpack/parts --> output function');
+  }
+
+  let targetOutput = null;
+  const baseOutput = {
     path: path.join(__dirname, '../../dist/', folder),
     filename: `[name].${placeholder}.js`,
-    publicPath: '/',
-  },
-});
+  };
+
+  if (target === 'client') {
+    targetOutput = Object.assign({}, baseOutput, {
+      publicPath: '/',
+    });
+  }
+
+  if (target === 'server') {
+    targetOutput = Object.assign({}, baseOutput, {
+      libraryTarget: 'commonjs2',
+    });
+  }
+
+  return { output: targetOutput };
+};
 
 exports.babelLoader = () => ({
   module: {
@@ -49,4 +69,16 @@ exports.writeWebpackStats = (filename = 'stats.json') => ({
       filename,
     }),
   ],
+});
+
+exports.limitChunksQtyPlugin = (qty = 1) => ({
+  plugins: [
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: qty,
+    }),
+  ],
+});
+
+exports.stats = (stats = 'normal') => ({
+  stats,
 });

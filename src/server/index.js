@@ -1,5 +1,6 @@
 const express = require('express');
 const webpack = require('webpack');
+const path = require('path');
 const c = require('colors');
 
 const clientConfig = require('../../webpack/client')();
@@ -13,10 +14,13 @@ let isBuilt = false;
 const app = express();
 
 const done = () => {
-  console.log('build done!');
+  !isBuilt &&
+  app.listen(PORT, (err) => {
+    isBuilt = true;
+    console.log(c.yellow(`BUILD COMPLETE -- SERVER LISTEN AT PORT ${PORT}`));
+  });
 };
 
-console.log(ENV)
 if (PROD_ENV) {
   webpack([clientConfig, serverConfig]).run((err, stats) => {
     if (err) {
@@ -24,7 +28,13 @@ if (PROD_ENV) {
       console.log(err);
     }
 
-    console.log(stats)
+    // console.log(stats.toString());
+
+    const clientStats = stats.toJson().children[0];
+    const serverRender = require('../../dist/server.prod.js').default;
+
+    app.use(serverRender({ clientStats }));
+    done();
   });
 } else {
   const compiler = webpack([clientConfig, serverConfig]);

@@ -8,7 +8,7 @@ const serverCommon = {
   name: 'server',
   target: 'node',
   entry: {
-    server: path.join(__dirname, '../../src/server/render.js')
+    server: path.join(__dirname, '../../src/server/router.js')
   },
   plugins: [
     new webpack.DefinePlugin({
