@@ -22,6 +22,10 @@ class App extends Component {
         page = 'Foo';
         break;
 
+      case '/route/apollo/a':
+        page = 'ApolloBar';
+        break;
+
       default:
         page = 'Bar';
         break;

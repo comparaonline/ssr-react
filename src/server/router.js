@@ -21,5 +21,13 @@ export default ({ clientStats }) => {
     Render(clientStats, req, res);
   });
 
+  router.get('/route/apollo/a', (req, res) => {
+    Render(clientStats, req, res);
+  });
+
+  router.get('/route/apollo/b', (req, res) => {
+    Render(clientStats, req, res);
+  });
+
   return router;
 };
