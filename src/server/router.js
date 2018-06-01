@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import Render from './render';
+
 export default ({ clientStats }) => {
   const router = new Router();
 
@@ -9,6 +11,14 @@ export default ({ clientStats }) => {
 
   router.get('/route/b', (req, res) => {
     res.send({ message: 'route B' });
+  });
+
+  router.get('/route/c', (req, res) => {
+    Render(clientStats, req, res);
+  });
+
+  router.get('/route/d', (req, res) => {
+    Render(clientStats, req, res);
   });
 
   return router;

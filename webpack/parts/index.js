@@ -82,3 +82,13 @@ exports.limitChunksQtyPlugin = (qty = 1) => ({
 exports.stats = (stats = 'normal') => ({
   stats,
 });
+
+exports.commonChunksPlugin = () => ({
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
+      filename: '[name].[chunkhash].js',
+      minChunks: Infinity
+    }),
+  ],
+});

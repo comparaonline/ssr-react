@@ -33,6 +33,9 @@ if (PROD_ENV) {
     const clientStats = stats.toJson().children[0];
     const serverRender = require('../../dist/server.prod.js').default;
 
+    const distPath = path.join(__dirname, '../../dist');
+    app.use(express.static(distPath));
+
     app.use(serverRender({ clientStats }));
     done();
   });

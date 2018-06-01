@@ -1,9 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 
-const App = () => <div>Hello React</div>;
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-);
+  render() {
+    return (
+      <div>React Universal</div>
+    );
+  }
+}
+
+export default App;
