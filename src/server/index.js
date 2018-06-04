@@ -3,6 +3,9 @@ const express = require('express');
 const webpack = require('webpack');
 const path = require('path');
 const c = require('colors');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
 const clientConfig = require('../../webpack/client')();
 const serverConfig = require('../../webpack/server')();
@@ -32,7 +35,7 @@ if (PROD_ENV) {
     // console.log(stats.toString());
 
     const clientStats = stats.toJson().children[0];
-    const serverRender = require('../../dist/server.prod.js').default;
+    const serverRender = require('../../dist/main.prod.js').default;
 
     const distPath = path.join(__dirname, '../../dist');
     app.use(express.static(distPath));
@@ -42,6 +45,12 @@ if (PROD_ENV) {
   });
 } else {
   const compiler = webpack([clientConfig, serverConfig]);
+  const clientCompiler = compiler.compilers[0];
+  const options = { publicPath: clientConfig.output.publicPath, stats: { colors: true } };
+
+  app.use(webpackDevMiddleware(compiler, options));
+  app.use(webpackHotMiddleware(clientCompiler));
+  app.use(webpackHotServerMiddleware(compiler));
 
   compiler.plugin('done', done);
 }

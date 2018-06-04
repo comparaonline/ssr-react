@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
+import AppContainer from 'react-hot-loader/lib/AppContainer';
 import { ApolloProvider } from 'react-apollo';
 import { createApolloClient } from '../utils/ApolloClient';
 import App from '../views';
@@ -10,17 +11,28 @@ import App from '../views';
 const history = createHistory();
 const apolloClient = createApolloClient(window.__APOLLO_STATE___);
 
-const app = (
-  <ApolloProvider client={apolloClient}>
-    <App history={history} />
-  </ApolloProvider>
+const getApp = (Main) => (
+  <AppContainer>
+    <ApolloProvider client={apolloClient}>
+      <Main history={history} />
+    </ApolloProvider>
+  </AppContainer>
 );
 
-const render = (AppComponent) => {
+const render = (app) => {
   ReactDOM.hydrate(
     app,
     document.getElementById('root')
   );
 };
 
-render(app);
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('../views/index.js', () => {
+    const _AppComponent = require('../views/index').default;
+    const app = getApp(_AppComponent);
+
+    render(app);
+  });
+}
+
+render(getApp(App));

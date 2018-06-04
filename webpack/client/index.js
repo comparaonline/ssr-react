@@ -12,6 +12,6 @@ module.exports = (env = process.env.NODE_ENV) => {
   const webpackConfig = merge(commonConfig, envConfig);
 
   // console.log(webpackConfig);
-  
+
   return webpackConfig;
 };

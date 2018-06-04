@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 
@@ -84,12 +85,24 @@ exports.stats = (stats = 'normal') => ({
   stats,
 });
 
-exports.commonChunksPlugin = () => ({
+exports.commonChunksPlugin = (placeholder = '[chunkhash]') => ({
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
-      filename: '[name].[chunkhash].js',
+      filename: `[name].${placeholder}.js`,
       minChunks: Infinity
     }),
+  ],
+});
+
+exports.hotModuleReplacementPlugin = () => ({
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+});
+
+exports.writeFilePlugin = () => ({
+  plugins: [
+    new WriteFilePlugin(),
   ],
 });
