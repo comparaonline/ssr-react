@@ -27,6 +27,7 @@ exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
   if (target === 'server') {
     targetOutput = Object.assign({}, baseOutput, {
       libraryTarget: 'commonjs2',
+      publicPath: '/',
     });
   }
 
@@ -114,6 +115,26 @@ exports.alias = () => ({
       Views: path.join(__dirname, '../../src/views'),
       Utils: path.join(__dirname, '../../src/utils'),
       Layouts: path.join(__dirname, '../../src/layouts'),
+      Assets: path.join(__dirname, '../../assets'),
     },
+  },
+});
+
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        include,
+        exclude,
+        use: [
+          {
+            loader: 'url-loader',
+            options,
+          },
+          'image-webpack-loader',
+        ],
+      },
+    ],
   },
 });

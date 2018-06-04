@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import universal from 'react-universal-component';
 
+import img from 'Assets/img/200.png';
+
 const UniversalComponent = universal(props => import(`./common/${props.page}`), {
   minDelay: 200,
 });
@@ -55,6 +57,7 @@ class App extends Component {
         <button onClick={() => this.onClick('Foo')}>Foo</button>
         <button onClick={() => this.onClick('ApolloBar')}>ApolloBar</button>
         <button onClick={() => this.onClick('ApolloFoo')}>ApolloFoo</button>
+        <img src={img} style={{ display: 'block', marginTop: '30px' }}/>
       </div>
     );
   }

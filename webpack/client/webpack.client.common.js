@@ -28,4 +28,7 @@ module.exports = merge([
   clientCommon,
   parts.writeWebpackStats('stats.client.json'),
   parts.alias(),
+  parts.loadImages({
+    options: { limit: 40000, name: 'img/[name].[hash].[ext]' },
+  }),
 ]);

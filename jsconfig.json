@@ -7,7 +7,8 @@
       "Config/*": ["config/*"],
       "Views/*": ["src/views/*"],
       "Utils/*": ["src/utils/*"],
-      "Layouts/*": ["src/layouts/*"]
+      "Layouts/*": ["src/layouts/*"],
+      "Assets/*": ["assets/*"]
     }
   },
   "exclude": ["node_modules", "dist"]
