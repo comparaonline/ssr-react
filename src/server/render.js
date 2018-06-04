@@ -22,7 +22,7 @@ export default async (clientStats, req, res) => {
   const chunks = flushChunks(clientStats, { chunkNames });
 
   const layoutConfig = Object.assign({}, chunks, { content });
-  const html = layout(layoutConfig);
+  const html = layout(layoutConfig, 'default');
 
   res.send(html);
 };

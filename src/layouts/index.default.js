@@ -9,7 +9,7 @@ export default (config) => {
       ${styles}
     </head>
     <body>
-      <h1>AMP Template</h1>
+      <h1>Default Template</h1>
       <div id="root">${content}</div>
       ${cssHash}
       ${js}
