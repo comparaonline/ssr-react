@@ -10,7 +10,17 @@ if (!global.fetch) {
 export default new ApolloClient({
   ssrMode: true,
   link: createHttpLink({
-    uri: 'https://services-qc.comparaonline.com/marketplace/graphql',
+    uri: 'http://localhost:3000/marketplace/graphql',
   }),
   cache: new InMemoryCache(),
 });
+
+export const createApolloClient = (state) => (
+  new ApolloClient({
+    ssrMode: false,
+    link: createHttpLink({
+      uri: 'http://localhost:3000/marketplace/graphql',
+    }),
+    cache: new InMemoryCache().restore(state),
+  })
+);

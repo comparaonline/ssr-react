@@ -26,6 +26,10 @@ class App extends Component {
         page = 'ApolloBar';
         break;
 
+      case '/route/apollo/b':
+        page = 'ApolloFoo';
+        break;
+
       default:
         page = 'Bar';
         break;
@@ -34,9 +38,9 @@ class App extends Component {
     this.state = { page };
   }
 
-  onClick = () => {
+  onClick = (page) => {
     this.setState({
-      page: this.state.page === 'Bar' ? 'Foo' : 'Bar',
+      page,
     })
   }
 
@@ -47,7 +51,10 @@ class App extends Component {
       <div>
         <h1>Universal Component</h1>
         <UniversalComponent page={page} />
-        <button onClick={this.onClick}>Switch</button>
+        <button onClick={() => this.onClick('Bar')}>Bar</button>
+        <button onClick={() => this.onClick('Foo')}>Foo</button>
+        <button onClick={() => this.onClick('ApolloBar')}>ApolloBar</button>
+        <button onClick={() => this.onClick('ApolloFoo')}>ApolloFoo</button>
       </div>
     );
   }
