@@ -9,26 +9,30 @@ import layout from 'Layouts';
 import buildApp from './app';
 
 export default async (clientStats, req, res) => {
-  const { app, apolloClientSSR } = buildApp(req);
+  try {
+    const { app, apolloClientSSR } = buildApp(req);
 
-  await getDataFromTree(app);
-  const apolloInitialState = apolloClientSSR.cache.extract();
-  // console.log('>>> apolloInitialState', apolloInitialState);
+    await getDataFromTree(app);
+    const apolloInitialState = apolloClientSSR.cache.extract();
+    // console.log('>>> apolloInitialState', apolloInitialState);
 
-  clearChunks();
+    clearChunks();
 
-  const sheet = new ServerStyleSheet();
-  const content = renderToString(sheet.collectStyles(app));
+    const sheet = new ServerStyleSheet();
+    const content = renderToString(sheet.collectStyles(app));
 
-  const chunkNames = flushChunkNames();
-  const chunks = flushChunks(clientStats, { chunkNames });
+    const chunkNames = flushChunkNames();
+    const chunks = flushChunks(clientStats, { chunkNames });
 
-  const layoutConfig = Object.assign({}, chunks, {
-    content,
-    styleTags: sheet.getStyleTags(),
-  });
+    const layoutConfig = Object.assign({}, chunks, {
+      content,
+      styleTags: sheet.getStyleTags(),
+    });
 
-  const html = layout(layoutConfig, 'default');
+    const html = layout(layoutConfig, 'default');
 
-  res.send(html);
+    res.send(html);
+  } catch (err) {
+    console.log(err);
+  }
 };
