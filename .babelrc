@@ -4,6 +4,11 @@
     "env": {
       "development": {
         "plugins": ["react-hot-loader/babel"]
+      },
+      "production": {
+        "plugins": [
+          ["babel-plugin-styled-components", { "ssr": true }]
+        ]
       }
     }
 }

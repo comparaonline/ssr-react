@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import { Title } from './Layout';
+
 const categoriesQuery = gql`
   query Categories($businessUnitInput: BusinessUnitInput) {
     categories(businessUnitInput: $businessUnitInput) {
@@ -36,7 +38,7 @@ class ApolloBar extends Component {
   render() {
     return (
       <div>
-        <h2>Apollo Bar Component</h2>
+        <Title>Apollo Bar Component</Title>
       </div>
     );
   }

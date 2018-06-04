@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Title } from './Layout';
 
 class Bar extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Bar extends Component {
   render() {
     return (
       <div>
-        <h2>Bar component loaded</h2>
+        <Title>Bar component loaded</Title>
         <span>this is an async component</span>
       </div>
     );
