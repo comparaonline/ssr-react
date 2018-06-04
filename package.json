@@ -10,7 +10,9 @@
     "build:client:prod": "cross-env NODE_ENV=production webpack -p --config webpack/client/index.js",
     "build:server:dev": "cross-env NODE_ENV=development webpack --config webpack/server/index.js",
     "build:server:prod": "cross-env NODE_ENV=production webpack -p --config webpack/server/index.js",
-    "start:spa:server": "http-server-spa dist"
+    "start:spa:server": "http-server-spa dist",
+    "start:dev": "npm run clean && cross-env NODE_ENV=development node src/server/index.js",
+    "start:prod": "npm run clean && cross-env NODE_ENV=production node src/server/index.js"
   },
   "keywords": [
     "react",
