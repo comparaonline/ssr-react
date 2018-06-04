@@ -27,4 +27,5 @@ const clientCommon = {
 module.exports = merge([
   clientCommon,
   parts.writeWebpackStats('stats.client.json'),
+  parts.alias(),
 ]);

@@ -106,3 +106,13 @@ exports.writeFilePlugin = () => ({
     new WriteFilePlugin(),
   ],
 });
+
+exports.alias = () => ({
+  resolve: {
+    alias: {
+      Config: path.join(__dirname, '../../config'),
+      Views: path.join(__dirname, '../../src/views'),
+      Utils: path.join(__dirname, '../../src/utils'),
+    },
+  },
+});

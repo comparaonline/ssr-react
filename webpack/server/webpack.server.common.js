@@ -20,4 +20,5 @@ const serverCommon = {
 module.exports = merge([
   serverCommon,
   parts.writeWebpackStats('stats.server.json'),
+  parts.alias(),
 ]);
