@@ -1,3 +1,4 @@
 {
-  "env": "development"
+  "env": "development",
+  "graphqlEndpoint": "http://localhost:3000/marketplace/graphql"
 }

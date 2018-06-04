@@ -6,7 +6,8 @@
     "paths": {
       "Config/*": ["config/*"],
       "Views/*": ["src/views/*"],
-      "Utils/*": ["src/utils/*"]
+      "Utils/*": ["src/utils/*"],
+      "Layouts/*": ["src/layouts/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

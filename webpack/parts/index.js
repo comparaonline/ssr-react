@@ -113,6 +113,7 @@ exports.alias = () => ({
       Config: path.join(__dirname, '../../config'),
       Views: path.join(__dirname, '../../src/views'),
       Utils: path.join(__dirname, '../../src/utils'),
+      Layouts: path.join(__dirname, '../../src/layouts'),
     },
   },
 });
