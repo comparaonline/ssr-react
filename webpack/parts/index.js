@@ -117,6 +117,7 @@ exports.alias = () => ({
       Utils: path.join(__dirname, '../../src/utils'),
       Layouts: path.join(__dirname, '../../src/layouts'),
       Assets: path.join(__dirname, '../../assets'),
+      Redux: path.join(__dirname, '../../src/redux'),
     },
   },
 });

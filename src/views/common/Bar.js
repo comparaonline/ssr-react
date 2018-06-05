@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Title } from './Layout';
+
+import { changeSSR } from 'Redux/actions';
 
 import styles from './styles.css';
 
@@ -13,14 +16,25 @@ class Bar extends Component {
     console.log('Bar Component Mounted!');
   }
 
+  onClick = () => {
+    this.props.changeSSR(!this.props.isSSR);
+  }
+
   render() {
     return (
       <div className={styles.tanBG}>
         <Title>Bar component loaded</Title>
         <span>this is an async component</span>
+        <div>isSSR: {this.props.isSSR.toString()}</div>
+        <button onClick={this.onClick} className={styles.changeStateButton}>change state</button>
       </div>
     );
   }
 }
 
-export default Bar;
+
+const mapStateToProps = (state) => ({
+  isSSR: state.isSSR,
+});
+
+export default connect(mapStateToProps, { changeSSR })(Bar);

@@ -10,7 +10,7 @@ import buildApp from './app';
 
 export default async (clientStats, req, res) => {
   try {
-    const { app, apolloClientSSR } = buildApp(req);
+    const { app, store, apolloClientSSR } = buildApp(req);
 
     await getDataFromTree(app);
     const apolloInitialState = apolloClientSSR.cache.extract();
@@ -27,6 +27,7 @@ export default async (clientStats, req, res) => {
     const layoutConfig = Object.assign({}, chunks, {
       content,
       styleTags: sheet.getStyleTags(),
+      reduxInitialState: store.getState(),
     });
 
     const html = layout(layoutConfig, 'default');

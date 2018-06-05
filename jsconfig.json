@@ -8,7 +8,8 @@
       "Views/*": ["src/views/*"],
       "Utils/*": ["src/utils/*"],
       "Layouts/*": ["src/layouts/*"],
-      "Assets/*": ["assets/*"]
+      "Assets/*": ["assets/*"],
+      "Redux/*": ["src/redux/*"],
     }
   },
   "exclude": ["node_modules", "dist"]
