@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Raleway';
+  src: url("../fonts/Raleway-Regular.ttf");
+}
+
 body {
   background-color: lemonchiffon;
+  font-family: 'Raleway';
 }

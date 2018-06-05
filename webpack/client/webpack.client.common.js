@@ -33,4 +33,7 @@ module.exports = merge([
     options: { limit: 40000, name: 'img/[name].[hash].[ext]' },
   }),
   parts.chunksCssLoader('client', !DEV_ENV),
+  parts.loadFonts({
+    options: { name: './fonts/[name].[ext]' },
+  }),
 ]);
