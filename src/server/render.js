@@ -26,6 +26,7 @@ export default async (clientStats, req, res) => {
 
     const layoutConfig = Object.assign({}, chunks, {
       content,
+      apolloInitialState,
       styleTags: sheet.getStyleTags(),
       reduxInitialState: store.getState(),
     });

@@ -1,5 +1,13 @@
 export default (config) => {
-  const { js, styles, cssHash, content, styleTags, reduxInitialState } = config;
+  const {
+    js,
+    styles,
+    cssHash,
+    content,
+    styleTags,
+    reduxInitialState,
+    apolloInitialState
+  } = config;
 
   return `<!doctype html>
   <html>
@@ -13,7 +21,8 @@ export default (config) => {
       <h1>Default Template</h1>
       <div id="root">${content}</div>
       <script>
-        window.__REDUX_STATE__ = ${JSON.stringify(reduxInitialState).replace(/</g, '\\u003c')}
+        window.__REDUX_STATE__ = ${JSON.stringify(reduxInitialState).replace(/</g, '\\u003c')};
+        window.__APOLLO_STATE__ = ${JSON.stringify(apolloInitialState).replace(/</g, '\\u003c')};
       </script>
       ${cssHash}
       ${js}

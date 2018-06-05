@@ -7,11 +7,12 @@ import { createApolloClient } from 'Utils/ApolloClient';
 import { configureStore } from 'Utils/ReduxSetup';
 
 const history = createHistory();
-const apolloClient = createApolloClient(window.__APOLLO_STATE___);
+const apolloClient = createApolloClient(window.__APOLLO_STATE__);
 const store = configureStore(window.__REDUX_STATE__);
 
 // Allow the passed state to be garbage-collected
 delete window.__REDUX_STATE__;
+delete window.__APOLLO_STATE__;
 
 export default (App) => (
   <AppContainer>
