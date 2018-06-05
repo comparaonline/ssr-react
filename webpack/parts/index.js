@@ -3,6 +3,7 @@ const path = require('path');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
   const isValidTarget = target === 'client' || target === 'server';
@@ -138,3 +139,70 @@ exports.loadImages = ({ include, exclude, options } = {}) => ({
     ],
   },
 });
+
+exports.cssLoader = () => ({
+  module: {
+    rules: [
+      {
+        use: ['style-loader', 'css-loader'],
+        test: /\.css$/,
+      },
+    ],
+  },
+});
+
+exports.chunksCssLoader = (target, minimize = true) => {
+  if (target !== 'client' && target !== 'server') {
+    throw new Error('target specified for chunksCssLoader is not valid');
+  }
+
+  const clientConfig = {
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: ExtractCssChunks.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: true,
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
+                  minimize,
+                },
+              }
+            ],
+          }),
+        }
+      ],
+    },
+    plugins: [
+      new ExtractCssChunks(),
+    ],
+  };
+
+  const serverConfig = {
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'css-loader/locals',
+              options: {
+                modules: true,
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+                minimize,
+              },
+            },
+          ],
+        }
+      ],
+    },
+  };
+
+  const targetConfig = target === 'client' ? clientConfig : serverConfig;
+
+  return targetConfig;
+};

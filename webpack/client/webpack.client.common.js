@@ -24,6 +24,7 @@ const clientCommon = {
   ],
 };
 
+
 module.exports = merge([
   clientCommon,
   parts.writeWebpackStats('stats.client.json'),
@@ -31,4 +32,5 @@ module.exports = merge([
   parts.loadImages({
     options: { limit: 40000, name: 'img/[name].[hash].[ext]' },
   }),
+  parts.chunksCssLoader('client', !DEV_ENV),
 ]);

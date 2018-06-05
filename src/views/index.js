@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import universal from 'react-universal-component';
 
 import img from 'Assets/img/200.png';
+import 'Assets/css/styles.css';
 
 const UniversalComponent = universal(props => import(`./common/${props.page}`), {
   minDelay: 200,

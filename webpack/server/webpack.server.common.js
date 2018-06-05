@@ -4,6 +4,8 @@ const merge = require('webpack-merge');
 
 const parts = require('../parts');
 
+const DEV_ENV = process.env.NODE_ENV === 'development';
+
 const serverCommon = {
   name: 'server',
   target: 'node',
@@ -24,4 +26,5 @@ module.exports = merge([
   parts.loadImages({
     options: { limit: 40000, name: 'img/[name].[hash].[ext]' },
   }),
+  parts.chunksCssLoader('server', !DEV_ENV),
 ]);
