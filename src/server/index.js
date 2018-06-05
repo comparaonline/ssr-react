@@ -7,6 +7,8 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
+const applyMiddlewares = require('./middlewares/index').default;
+
 const clientConfig = require('../../webpack/client')();
 const serverConfig = require('../../webpack/server')();
 
@@ -24,6 +26,8 @@ const done = () => {
     console.log(c.yellow(`BUILD COMPLETE -- SERVER LISTEN AT PORT ${PORT}`));
   });
 };
+
+applyMiddlewares(app);
 
 if (PROD_ENV) {
   webpack([clientConfig, serverConfig]).run((err, stats) => {
