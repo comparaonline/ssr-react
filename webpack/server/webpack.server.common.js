@@ -2,9 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 
+const { env, isProdEnv } = require('../../src/utils/EnvInfo');
 const parts = require('../parts');
-
-const DEV_ENV = process.env.NODE_ENV === 'development';
 
 const serverCommon = {
   name: 'server',
@@ -14,7 +13,7 @@ const serverCommon = {
   ],
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(env),
     }),
   ],
 }
@@ -26,7 +25,7 @@ module.exports = merge([
   parts.loadImages({
     options: { limit: 40000, name: 'img/[name].[hash].[ext]' },
   }),
-  parts.chunksCssLoader('server', !DEV_ENV),
+  parts.chunksCssLoader('server', isProdEnv),
   parts.loadFonts({
     options: { name: './fonts/[name].[ext]' },
   }),

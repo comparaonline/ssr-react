@@ -1,5 +1,16 @@
 const env = process.env.NODE_ENV;
-const isDevEnv = env === 'development';
-const isProdEnv = env !== 'development';
+
+const devEnvs = [
+  'development',
+];
+
+const prodEnvs = [
+  'production',
+  'staging',
+  'qc',
+];
+
+const isDevEnv = devEnvs.includes(env);
+const isProdEnv = prodEnvs.includes(env);
 
 export { env, isDevEnv, isProdEnv };
