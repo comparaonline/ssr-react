@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { translate } from 'react-i18next';
 
 class Foo extends Component {
   constructor(props) {
@@ -11,13 +12,15 @@ class Foo extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
         <h2>Foo component loaded</h2>
         <span>this is an async component</span>
+        <p>{ t('text') }</p>
       </div>
     );
   }
 }
 
-export default Foo;
+export default translate()(Foo);

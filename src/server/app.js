@@ -1,5 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
+import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
 import { createApolloClientSSR } from 'Utils/ApolloClient';
@@ -16,7 +17,9 @@ export default (req = {}) => {
   const app = (
     <Provider store={store}>
       <ApolloProvider client={apolloClientSSR}>
-        <App history={history} />
+        <I18nextProvider i18n={req.i18n}>
+          <App history={history} />
+        </I18nextProvider>
       </ApolloProvider>
     </Provider>
   );
