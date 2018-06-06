@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { flushChunkNames, clearChunks } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
+import { getInitialLanguage, getInitialState } from 'Utils/I18nSSR';
 import layout from 'Layouts';
 
 import buildApp from './app';
@@ -29,6 +30,8 @@ export default async (clientStats, req, res) => {
       apolloInitialState,
       styleTags: sheet.getStyleTags(),
       reduxInitialState: store.getState(),
+      i18nInitialState: getInitialState(req),
+      i18nInitialLanguage: getInitialLanguage(req),
     });
 
     const html = layout(layoutConfig, 'default');

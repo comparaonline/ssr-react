@@ -2,6 +2,11 @@
   "default": "default_config",
   "graphqlEndpoint": "http://localhost:3000/marketplace/graphql",
   "i18n": {
+    "config": {
+      "fallbackLng": "es_CL",
+      "keySeparator": ":",
+      "nsSeparator": "."
+    },
     "languages": [
       {
         "name": "Chile",

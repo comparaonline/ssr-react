@@ -6,6 +6,7 @@ import { find } from 'lodash';
 import { get as getConfig} from '../../../config';
 
 const langConfig = getConfig('i18n.languages');
+const commonConfig = getConfig('i18n.config');
 const defaultLang = find(langConfig, { default: true });
 const langDetector = new LanguageDetector();
 
@@ -23,13 +24,6 @@ langDetector.addDetector({
     Object.assign(req, { locals: { lng } });
   },
 });
-
-
-const commonConfig = {
-  fallbackLng: defaultLang.locale,
-  keySeparator: ':',
-  nsSeparator: '.',
-};
 
 
 const serverConfig = Object.assign({}, commonConfig, {

@@ -6,7 +6,9 @@ export default (config) => {
     content,
     styleTags,
     reduxInitialState,
-    apolloInitialState
+    apolloInitialState,
+    i18nInitialState,
+    i18nInitialLanguage,
   } = config;
 
   return `<!doctype html>
@@ -23,6 +25,8 @@ export default (config) => {
       <script>
         window.__REDUX_STATE__ = ${JSON.stringify(reduxInitialState).replace(/</g, '\\u003c')};
         window.__APOLLO_STATE__ = ${JSON.stringify(apolloInitialState).replace(/</g, '\\u003c')};
+        window.__I18N_STATE__ = ${JSON.stringify(i18nInitialState).replace(/</g, '\\u003c')};
+        window.__I18N_LANGUAGE__ = ${JSON.stringify(i18nInitialLanguage).replace(/</g, '\\u003c')};
       </script>
       ${cssHash}
       ${js}
