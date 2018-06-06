@@ -1,4 +1,22 @@
 {
   "default": "default_config",
-  "graphqlEndpoint": "http://localhost:3000/marketplace/graphql"
+  "graphqlEndpoint": "http://localhost:3000/marketplace/graphql",
+  "i18n": {
+    "languages": [
+      {
+        "name": "Chile",
+        "domain": ".cl",
+        "code": "cl",
+        "locale": "es_CL",
+        "default": true
+      },
+      {
+        "name": "Brasil",
+        "domain": ".com.br",
+        "code": "br",
+        "locale": "pt_BR",
+        "default": false
+      }
+    ]
+  }
 }

@@ -27,34 +27,39 @@ const done = () => {
   });
 };
 
-applyMiddlewares(app);
 
-if (PROD_ENV) {
-  webpack([clientConfig, serverConfig]).run((err, stats) => {
-    if (err) {
-      console.log(c.red('Error in build process:'));
-      console.log(err);
-    }
+const init = async () => {
+  await applyMiddlewares(app);
 
-    // console.log(stats.toString());
+  if (PROD_ENV) {
+    webpack([clientConfig, serverConfig]).run((err, stats) => {
+      if (err) {
+        console.log(c.red('Error in build process:'));
+        console.log(err);
+      }
 
-    const clientStats = stats.toJson().children[0];
-    const serverRender = require('../../dist/main.prod.js').default;
+      // console.log(stats.toString());
 
-    const distPath = path.join(__dirname, '../../dist');
-    app.use(express.static(distPath));
+      const clientStats = stats.toJson().children[0];
+      const serverRender = require('../../dist/main.prod.js').default;
 
-    app.use(serverRender({ clientStats }));
-    done();
-  });
-} else {
-  const compiler = webpack([clientConfig, serverConfig]);
-  const clientCompiler = compiler.compilers[0];
-  const options = { publicPath: clientConfig.output.publicPath, stats: { colors: true } };
+      const distPath = path.join(__dirname, '../../dist');
+      app.use(express.static(distPath));
 
-  app.use(webpackDevMiddleware(compiler, options));
-  app.use(webpackHotMiddleware(clientCompiler));
-  app.use(webpackHotServerMiddleware(compiler));
+      app.use(serverRender({ clientStats }));
+      done();
+    });
+  } else {
+    const compiler = webpack([clientConfig, serverConfig]);
+    const clientCompiler = compiler.compilers[0];
+    const options = { publicPath: clientConfig.output.publicPath, stats: { colors: true } };
 
-  compiler.plugin('done', done);
-}
+    app.use(webpackDevMiddleware(compiler, options));
+    app.use(webpackHotMiddleware(clientCompiler));
+    app.use(webpackHotServerMiddleware(compiler));
+
+    compiler.plugin('done', done);
+  }
+};
+
+init();
