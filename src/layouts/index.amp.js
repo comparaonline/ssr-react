@@ -1,6 +1,7 @@
 export default (config) => {
   const {
     js,
+    helmet,
     styles,
     cssHash,
     content,
@@ -12,14 +13,18 @@ export default (config) => {
   } = config;
 
   return `<!doctype html>
-  <html>
+  <html ${helmet.htmlAttributes.toString()}>
     <head>
       <meta charset="utf-8">
       <title>react-universal-component-boilerplate</title>
       ${styleTags}
       ${styles}
+
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
+      ${helmet.link.toString()}
     </head>
-    <body>
+    <body ${helmet.bodyAttributes.toString()}>
       <h1>AMP Template</h1>
       <div id="root">${content}</div>
       <script>

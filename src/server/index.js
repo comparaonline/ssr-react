@@ -38,7 +38,7 @@ const init = async () => {
         console.log(err);
       }
 
-      // console.log(stats.toString());
+      console.log(stats.toString());
 
       const clientStats = stats.toJson().children[0];
       const serverRender = require('../../dist/main.prod.js').default;

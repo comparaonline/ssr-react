@@ -11,7 +11,7 @@ import buildApp from './app';
 
 export default async (clientStats, req, res) => {
   try {
-    const { app, store, apolloClientSSR } = buildApp(req);
+    const { app, store, helmetStore, apolloClientSSR } = buildApp(req);
 
     await getDataFromTree(app);
     const apolloInitialState = apolloClientSSR.cache.extract();
@@ -28,6 +28,7 @@ export default async (clientStats, req, res) => {
     const layoutConfig = Object.assign({}, chunks, {
       content,
       apolloInitialState,
+      helmet: helmetStore.renderStatic(),
       styleTags: sheet.getStyleTags(),
       reduxInitialState: store.getState(),
       i18nInitialState: getInitialState(req),

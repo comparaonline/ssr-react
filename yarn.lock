@@ -2229,6 +2229,10 @@ decompress@^4.0.0:
     pify "^2.3.0"
     strip-dirs "^2.0.0"
 
+deep-equal@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
+
 deep-extend@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.5.1.tgz#b894a9dd90d3023fbf1c55a394fb858eb2066f1f"
@@ -2731,6 +2735,10 @@ executable@^1.0.0:
   resolved "https://registry.yarnpkg.com/executable/-/executable-1.1.0.tgz#877980e9112f3391066da37265de7ad8434ab4d9"
   dependencies:
     meow "^3.1.0"
+
+exenv@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
 
 exit-hook@^1.0.0:
   version "1.1.1"
@@ -5855,7 +5863,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -5988,6 +5996,13 @@ react-apollo@^2.1.4:
     lodash "4.17.5"
     prop-types "^15.6.0"
 
+react-broadcast@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-broadcast/-/react-broadcast-0.7.0.tgz#e0f70c208293bacc43eb1fff1971806076c756b6"
+  dependencies:
+    prop-types "^15.6.0"
+    warning "^3.0.0"
+
 react-deep-force-update@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.1.1.tgz#8ea4263cd6455a050b37445b3f08fd839d86e909"
@@ -6039,6 +6054,27 @@ react-redux@^5.0.7:
     lodash-es "^4.17.5"
     loose-envify "^1.1.0"
     prop-types "^15.6.0"
+
+react-reffect@^2.1.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-reffect/-/react-reffect-2.2.1.tgz#e42f52cd02eaf3cd33174e30940b5a4044f06b1f"
+  dependencies:
+    exenv "^1.2.2"
+    hoist-non-react-statics "^2.5.0"
+    prop-types "^15.6.1"
+    react-broadcast "^0.7.0"
+    redux "^4.0.0"
+    shallowequal "^1.0.2"
+
+react-safety-helmet@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/react-safety-helmet/-/react-safety-helmet-6.2.1.tgz#d5204d210f81476a1133846cbf9bac5d1f4ec318"
+  dependencies:
+    deep-equal "^1.0.1"
+    exenv "^1.2.2"
+    object-assign "^4.1.1"
+    prop-types "^15.5.4"
+    react-reffect "^2.1.0"
 
 react-universal-component@^2.9.0:
   version "2.9.0"
@@ -6557,6 +6593,10 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+shallowequal@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.0.2.tgz#1561dbdefb8c01408100319085764da3fcf83f8f"
 
 shebang-command@^1.2.0:
   version "1.2.0"

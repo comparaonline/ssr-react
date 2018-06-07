@@ -40,6 +40,7 @@
     "react-dom": "^16.4.0",
     "react-i18next": "^7.7.0",
     "react-redux": "^5.0.7",
+    "react-safety-helmet": "^6.2.1",
     "react-universal-component": "^2.9.0",
     "redux": "^4.0.0",
     "styled-components": "^3.3.2",
