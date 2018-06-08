@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Title } from './Layout';
 
@@ -6,7 +7,7 @@ import { changeSSR } from 'Redux/actions';
 
 import styles from './styles.css';
 
-class Bar extends Component {
+export class Bar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -31,6 +32,11 @@ class Bar extends Component {
     );
   }
 }
+
+Bar.propTypes = {
+  isSSR: PropTypes.bool.isRequired,
+  changeSSR: PropTypes.func.isRequired,
+};
 
 
 const mapStateToProps = (state) => ({

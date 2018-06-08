@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bar Component it should match with snapshot 1`] = `
+<div>
+  <h2
+    className="sc-bdVaJa rOCEJ"
+  >
+    Bar component loaded
+  </h2>
+  <span>
+    this is an async component
+  </span>
+  <div>
+    isSSR: 
+    true
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    change state
+  </button>
+</div>
+`;
