@@ -3,7 +3,7 @@ import path from 'path';
 import i18nMiddleware, { LanguageDetector } from 'i18next-express-middleware';
 import i18nextBackend from 'i18next-node-fs-backend';
 import { find } from 'lodash';
-import { get as getConfig} from '../../../config';
+import { get as getConfig } from '../../../config';
 
 const langConfig = getConfig('i18n.languages');
 const commonConfig = getConfig('i18n.config');
@@ -14,9 +14,9 @@ langDetector.addDetector({
   name: 'CustomLanguageDetector',
   lookup(req) {
     const host = req.get('host');
-    const _langConfig = find(langConfig, (lang) => {
-      return host.includes(lang.domain);
-    }) || defaultLang;
+    const _langConfig = find(langConfig, lang => (
+      host.includes(lang.domain)
+    )) || defaultLang;
 
     return _langConfig.locale;
   },
@@ -32,7 +32,7 @@ const serverConfig = Object.assign({}, commonConfig, {
     loadPath: `${path.join(__dirname, '../../i18n')}/{{lng}}/{{ns}}.json`,
   },
   detection: {
-    order: ['CustomLanguageDetector']
+    order: ['CustomLanguageDetector'],
   },
 });
 
@@ -44,7 +44,7 @@ const i18nextInit = new Promise((resolve, reject) => {
     .init(serverConfig, (err) => {
       if (err) {
         reject(err);
-      };
+      }
 
       resolve(i18nMiddleware.handle(i18n));
     });

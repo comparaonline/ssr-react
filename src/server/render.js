@@ -1,4 +1,3 @@
-import React from 'react';
 import { getDataFromTree } from 'react-apollo';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
@@ -11,11 +10,15 @@ import buildApp from './app';
 
 export default async (clientStats, req, res) => {
   try {
-    const { app, store, helmetStore, apolloClientSSR } = buildApp(req);
+    const {
+      app,
+      store,
+      helmetStore,
+      apolloClientSSR,
+    } = buildApp(req);
 
     await getDataFromTree(app);
     const apolloInitialState = apolloClientSSR.cache.extract();
-    // console.log('>>> apolloInitialState', apolloInitialState);
 
     clearChunks();
 
@@ -39,6 +42,6 @@ export default async (clientStats, req, res) => {
 
     res.send(html);
   } catch (err) {
-    console.log(err);
+    console.log(err); // eslint-disable-line
   }
 };

@@ -1,11 +1,11 @@
-require("babel-polyfill");
+require('babel-polyfill');
 const express = require('express');
-const webpack = require('webpack');
+const webpack = require('webpack'); // eslint-disable-line
 const path = require('path');
-const c = require('colors');
+const c = require('colors'); // eslint-disable-line
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
+const webpackHotServerMiddleware = require('webpack-hot-server-middleware'); // eslint-disable-line
 
 const applyMiddlewares = require('./middlewares/index').default;
 
@@ -19,13 +19,19 @@ let isBuilt = false;
 
 const app = express();
 
+/* eslint-disable */
 const done = () => {
   !isBuilt &&
   app.listen(PORT, (err) => {
+    if (err) {
+      console.log(err);
+    }
+
     isBuilt = true;
     console.log(c.yellow(`BUILD COMPLETE -- SERVER LISTEN AT PORT ${PORT}`));
   });
 };
+/* eslint-enable */
 
 
 const init = async () => {
@@ -34,14 +40,14 @@ const init = async () => {
   if (PROD_ENV) {
     webpack([clientConfig, serverConfig]).run((err, stats) => {
       if (err) {
-        console.log(c.red('Error in build process:'));
-        console.log(err);
+        console.log(c.red('Error in build process:')); // eslint-disable-line
+        console.log(err); // eslint-disable-line
       }
 
-      console.log(stats.toString());
+      console.log(stats.toString()); // eslint-disable-line
 
       const clientStats = stats.toJson().children[0];
-      const serverRender = require('../../dist/main.prod.js').default;
+      const serverRender = require('../../dist/main.prod.js').default; // eslint-disable-line
 
       const distPath = path.join(__dirname, '../../dist');
       app.use(express.static(distPath));

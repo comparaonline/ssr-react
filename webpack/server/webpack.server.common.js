@@ -28,7 +28,7 @@ const serverCommon = {
       'process.env.NODE_ENV': JSON.stringify(env),
     }),
   ],
-}
+};
 
 module.exports = merge([
   serverCommon,

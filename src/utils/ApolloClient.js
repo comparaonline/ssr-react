@@ -18,7 +18,7 @@ export const createApolloClientSSR = () => (
   })
 );
 
-export const createApolloClient = (state) => (
+export const createApolloClient = state => (
   new ApolloClient({
     ssrMode: false,
     link: createHttpLink({

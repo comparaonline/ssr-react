@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Title } from './Layout';
-
 import { changeSSR } from 'Redux/actions';
+
+import { Title } from './Layout';
 
 import styles from './styles.css';
 
@@ -14,7 +14,7 @@ export class Bar extends Component {
   }
 
   componentDidMount() {
-    console.log('Bar Component Mounted!');
+    console.log('Bar Component Mounted!'); // eslint-disable-line
   }
 
   onClick = () => {
@@ -39,7 +39,7 @@ Bar.propTypes = {
 };
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isSSR: state.isSSR,
 });
 

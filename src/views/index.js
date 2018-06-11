@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import universal from 'react-universal-component';
 
 import img from 'Assets/img/200.png';
@@ -44,7 +45,7 @@ class App extends Component {
   onClick = (page) => {
     this.setState({
       page,
-    })
+    });
   }
 
   render() {
@@ -58,10 +59,14 @@ class App extends Component {
         <button onClick={() => this.onClick('Foo')}>Foo</button>
         <button onClick={() => this.onClick('ApolloBar')}>ApolloBar</button>
         <button onClick={() => this.onClick('ApolloFoo')}>ApolloFoo</button>
-        <img src={img} style={{ display: 'block', marginTop: '30px' }}/>
+        <img src={img} alt="" style={{ display: 'block', marginTop: '30px' }} />
       </div>
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+};
 
 export default App;

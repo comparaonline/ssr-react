@@ -223,3 +223,7 @@ exports.loadFonts = ({ include, exclude, options }) => ({
     ],
   },
 });
+
+exports.extensions = () => ({
+  extensions: ['.js', '.jsx', '.json'],
+});

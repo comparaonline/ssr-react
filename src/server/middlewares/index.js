@@ -11,8 +11,8 @@ const applyMiddlewares = async (app) => {
     middlewares.forEach((middleware) => {
       app.use(middleware);
     });
-  } catch (error) {
-    console.log(err);
+  } catch (err) {
+    console.log(err); // eslint-disable-line
   }
 };
 

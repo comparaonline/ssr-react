@@ -1,4 +1,4 @@
-import { createStore, combineReducers, compose } from 'redux';
+import { createStore, compose } from 'redux';
 import { isDevEnv } from 'Utils/EnvInfo';
 import rootReducer from 'Redux/reducers';
 
@@ -12,16 +12,16 @@ export const configureStore = (initialState = {}) => {
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers()
+    composeEnhancers(),
   );
 
   return store;
-}
+};
 
 export const getInitialState = (opts = {}) => {
-  const { req } = opts;
+  const { req } = opts; // eslint-disable-line
 
   return {
     isSSR: true,
   };
-}
+};

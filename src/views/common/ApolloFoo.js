@@ -30,7 +30,7 @@ class ApolloFoo extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    console.log(this.props); //eslint-disable-line
   }
 
   render() {
@@ -48,7 +48,7 @@ export default graphql(categoriesQuery, {
       businessUnitInput: {
         country_code: 'cl',
         slug: 'afp',
-      }
-    }
-  }
+      },
+    },
+  },
 })(ApolloFoo);

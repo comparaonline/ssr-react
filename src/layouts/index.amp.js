@@ -37,4 +37,4 @@ export default (config) => {
       ${js}
     </body>
   </html>`;
-}
+};

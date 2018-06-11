@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 
 class Foo extends Component {
@@ -8,7 +9,7 @@ class Foo extends Component {
   }
 
   componentDidMount() {
-    console.log('Foo Component Mounted!');
+    console.log('Foo Component Mounted!'); // eslint-disable-line
   }
 
   render() {
@@ -22,5 +23,9 @@ class Foo extends Component {
     );
   }
 }
+
+Foo.propTypes = {
+  t: PropTypes.func.isRequired,
+};
 
 export default translate()(Foo);

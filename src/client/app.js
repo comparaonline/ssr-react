@@ -21,7 +21,7 @@ window.i18n = i18n.init(i18nConfig);
 delete window.__REDUX_STATE__;
 delete window.__APOLLO_STATE__;
 
-export default (App) => (
+export default App => (
   <AppContainer>
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
