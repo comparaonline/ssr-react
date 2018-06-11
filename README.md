@@ -19,7 +19,7 @@ SSR-React it's a React boilerplate project that supports SSR, CodeSplitting, Gra
 React-SSR supports the follow features:
 - ES6
 - Server Side Rendering (SSR)
-- Client Side Rendering, client rydratation (CSR)
+- Client Side Rendering, client rehydratation (CSR)
 - Hot Module Replacement (HMR)
 - Redux
 - GraphQL (with Apollo)
