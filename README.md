@@ -105,4 +105,4 @@ You can customize application config inside `config` directory. `default.json` c
 - ssr-react uses `cross-env` to define env variables
 
 # Next Steps
-- Add support for client build only, replacing `reydrate` by `render`
+- Add support for client build only, replacing `rehydrate` by `render`
