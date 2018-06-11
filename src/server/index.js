@@ -7,6 +7,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware'); // eslint-disable-line
 
+const config = require('../../config').default;
 const applyMiddlewares = require('./middlewares/index').default;
 
 const clientConfig = require('../../webpack/client')();
@@ -14,7 +15,7 @@ const serverConfig = require('../../webpack/server')();
 
 const ENV = process.env.NODE_ENV || 'production';
 const PROD_ENV = ENV === 'production';
-const PORT = 3011;
+const PORT = config.get('port', 3011);
 let isBuilt = false;
 
 const app = express();

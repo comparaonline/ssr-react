@@ -1,6 +1,7 @@
 {
   "default": "default_config",
   "graphqlEndpoint": "http://localhost:3000/marketplace/graphql",
+  "port": 3011,
   "i18n": {
     "config": {
       "fallbackLng": "es_CL",
