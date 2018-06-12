@@ -13,20 +13,24 @@ export default ({ clientStats }) => {
     res.send({ message: 'route B' });
   });
 
-  router.get('/route/c', (req, res) => {
-    Render(clientStats, req, res);
+  router.get('/route/c', async (req, res) => {
+    const html = await Render(clientStats, req, res);
+    res.send(html);
   });
 
-  router.get('/route/d', (req, res) => {
-    Render(clientStats, req, res);
+  router.get('/route/d', async (req, res) => {
+    const html = await Render(clientStats, req, res);
+    res.send(html);
   });
 
-  router.get('/route/apollo/a', (req, res) => {
-    Render(clientStats, req, res);
+  router.get('/route/apollo/a', async (req, res) => {
+    const html = await Render(clientStats, req, res);
+    res.send(html);
   });
 
-  router.get('/route/apollo/b', (req, res) => {
-    Render(clientStats, req, res);
+  router.get('/route/apollo/b', async (req, res) => {
+    const html = await Render(clientStats, req, res);
+    res.send(html);
   });
 
   return router;

@@ -39,8 +39,7 @@ export default async (clientStats, req, res) => {
     });
 
     const html = layout(layoutConfig, 'default');
-
-    res.send(html);
+    return html;
   } catch (err) {
     console.log(err); // eslint-disable-line
   }
