@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import Render from './render';
+import render from './render';
 
 export default ({ clientStats }) => {
   const router = new Router();
@@ -14,22 +14,22 @@ export default ({ clientStats }) => {
   });
 
   router.get('/route/c', async (req, res) => {
-    const html = await Render(clientStats, req, res);
+    const html = await render({ clientStats, req, res });
     res.send(html);
   });
 
   router.get('/route/d', async (req, res) => {
-    const html = await Render(clientStats, req, res);
+    const html = await render({ clientStats, req, res });
     res.send(html);
   });
 
   router.get('/route/apollo/a', async (req, res) => {
-    const html = await Render(clientStats, req, res);
+    const html = await render({ clientStats, req, res });
     res.send(html);
   });
 
   router.get('/route/apollo/b', async (req, res) => {
-    const html = await Render(clientStats, req, res);
+    const html = await render({ clientStats, req, res });
     res.send(html);
   });
 

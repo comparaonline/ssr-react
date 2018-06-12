@@ -8,8 +8,10 @@ import layout from 'Layouts';
 
 import buildApp from './app';
 
-export default async (clientStats, req, res) => {
+export default async (data) => {
   try {
+    const { clientStats, req } = data;
+
     const {
       app,
       store,
