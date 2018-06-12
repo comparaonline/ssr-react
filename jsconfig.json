@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "allowSyntheticDefaultImports": false,
-    "baseUrl": "./",
+    "target": "ES6",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "module": "commonjs",
     "paths": {
       "Config/*": ["config/*"],
       "Views/*": ["src/views/*"],
@@ -12,5 +13,6 @@
       "Redux/*": ["src/redux/*"],
     }
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["**/*.js"],
+  "exclude": ["dist"]
 }
