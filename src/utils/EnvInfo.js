@@ -13,4 +13,7 @@ const prodEnvs = [
 const isDevEnv = devEnvs.includes(env);
 const isProdEnv = prodEnvs.includes(env);
 
-export { env, isDevEnv, isProdEnv };
+const isServer = typeof window === 'undefined';
+const isClient = !isServer;
+
+export { env, isDevEnv, isProdEnv, isClient, isServer };
