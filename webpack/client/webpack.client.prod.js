@@ -5,7 +5,7 @@ const productionConfig = merge([
   parts.output('client', '[chunkhash]'),
   parts.babelLoader(),
   parts.commonChunksPlugin(),
-  parts.uglifyJsPlugin(true),
+  parts.uglifyJsPlugin(),
   parts.htmlPlugin(),
 ]);
 
