@@ -1,14 +1,15 @@
 {
     "presets": ["es2015", "stage-1", "react"],
-    "plugins": ["universal-import"],
+    "plugins": [
+      "universal-import",
+      ["babel-plugin-styled-components", { "ssr": true }]
+    ],
     "env": {
       "development": {
         "plugins": ["react-hot-loader/babel"]
       },
       "production": {
-        "plugins": [
-          ["babel-plugin-styled-components", { "ssr": true }]
-        ]
+        "plugins": []
       }
     }
 }
