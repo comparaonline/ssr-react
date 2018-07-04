@@ -1,4 +1,4 @@
 {
   "env": "development",
-  "graphqlEndpoint": "http://localhost:3000/marketplace/graphql"
+  "graphqlEndpoint": "https://graphql-pokemon.now.sh/"
 }

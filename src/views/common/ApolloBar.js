@@ -4,21 +4,34 @@ import gql from 'graphql-tag';
 
 import { Title } from './Layout';
 
-const categoriesQuery = gql`
-  query Categories($businessUnitInput: BusinessUnitInput) {
-    categories(businessUnitInput: $businessUnitInput) {
+const pokemonQuery = gql`
+  query Pokemon($pokemon: String){
+    pokemon(name: $pokemon) {
       id
-      code
-      order
-      url
+      number
       name
-      with_redirect
-      business_unit {
-        category
-        code
-        logo
+      attacks {
+        special {
+          name
+          type
+          damage
+        }
+      }
+      evolutions {
+        id
+        number
         name
-        slug
+        weight {
+          minimum
+          maximum
+        }
+        attacks {
+          fast {
+            name
+            type
+            damage
+          }
+        }
       }
     }
   }
@@ -44,13 +57,10 @@ class ApolloBar extends Component {
   }
 }
 
-export default graphql(categoriesQuery, {
+export default graphql(pokemonQuery, {
   options: {
     variables: {
-      businessUnitInput: {
-        country_code: 'cl',
-        slug: 'seguro-obligatorio-soap',
-      },
+      pokemon: 'Pikachu',
     },
   },
 })(ApolloBar);

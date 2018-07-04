@@ -1,6 +1,6 @@
 {
   "default": "default_config",
-  "graphqlEndpoint": "http://localhost:3000/marketplace/graphql",
+  "graphqlEndpoint": "https://graphql-pokemon.now.sh/",
   "port": 3011,
   "i18n": {
     "config": {
