@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 
-const { env, isProdEnv, isDevEnv } = require('../../src/utils/EnvInfo');
+const { env, isProdEnv, isDevEnv, analyze } = require('../../src/utils/EnvInfo');
 const parts = require('../parts');
 
 const baseEntry = [path.join(__dirname, '../../src/client/index.js')];
@@ -36,4 +36,5 @@ module.exports = merge([
   parts.loadFonts({
     options: { name: './fonts/[name].[ext]' },
   }),
+  analyze ? parts.bundleAnalyzer() : {},
 ]);

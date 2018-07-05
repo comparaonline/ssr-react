@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
   const isValidTarget = target === 'client' || target === 'server';
@@ -227,4 +228,10 @@ exports.loadFonts = ({ include, exclude, options }) => ({
 
 exports.extensions = () => ({
   extensions: ['.js', '.jsx', '.json'],
+});
+
+exports.bundleAnalyzer = () => ({
+  plugins: [
+    new BundleAnalyzerPlugin(),
+  ],
 });
