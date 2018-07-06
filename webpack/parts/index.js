@@ -92,7 +92,7 @@ exports.stats = (stats = 'normal') => ({
 exports.commonChunksPlugin = (placeholder = '[chunkhash]') => ({
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
+      names: ['bootstrap', 'vendor'], // needed to put webpack bootstrap code before chunks
       filename: `[name].${placeholder}.js`,
       minChunks: Infinity
     }),

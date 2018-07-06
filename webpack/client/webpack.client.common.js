@@ -2,7 +2,13 @@ const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 
-const { env, isProdEnv, isDevEnv, analyze } = require('../../src/utils/EnvInfo');
+const {
+  env,
+  isProdEnv,
+  isDevEnv,
+  analyze,
+} = require('../../src/utils/EnvInfo');
+const vendor = require('./vendor.config');
 const parts = require('../parts');
 
 const baseEntry = [path.join(__dirname, '../../src/client/index.js')];
@@ -11,7 +17,10 @@ const devEntry = [
   'react-hot-loader/patch',
 ];
 
-const entry = isDevEnv ? devEntry.concat(baseEntry) : baseEntry;
+const entry = {
+  main: isDevEnv ? devEntry.concat(baseEntry) : baseEntry,
+  vendor,
+};
 
 const clientCommon = {
   name: 'client',
