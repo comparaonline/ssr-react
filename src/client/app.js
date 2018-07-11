@@ -21,8 +21,8 @@ window.i18n = i18n.init(i18nConfig);
 delete window.__REDUX_STATE__;
 delete window.__APOLLO_STATE__;
 
-export default App => (
-  <AppContainer>
+export default (App) => {
+  const AppComponent = (
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
         <I18nextProvider
@@ -34,5 +34,15 @@ export default App => (
         </I18nextProvider>
       </ApolloProvider>
     </Provider>
-  </AppContainer>
-);
+  );
+
+  if (process.env.NODE_ENV === 'production') {
+    return AppComponent;
+  }
+
+  return (
+    <AppContainer>
+      {AppContainer}
+    </AppContainer>
+  );
+};
