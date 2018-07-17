@@ -42,7 +42,7 @@ export default (App) => {
 
   return (
     <AppContainer>
-      {AppContainer}
+      {AppComponent}
     </AppContainer>
   );
 };

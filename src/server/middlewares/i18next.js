@@ -1,14 +1,20 @@
 import i18n from 'i18next';
 import path from 'path';
+import fs from 'fs';
 import i18nMiddleware, { LanguageDetector } from 'i18next-express-middleware';
 import i18nextBackend from 'i18next-node-fs-backend';
 import { find } from 'lodash';
 import { get as getConfig } from '../../../config';
+import { ROOT_PATH } from '../../utils/EnvInfo';
 
 const langConfig = getConfig('i18n.languages');
 const commonConfig = getConfig('i18n.config');
+const i18nPath = path.join(ROOT_PATH, getConfig('i18n.rootPath'));
+const fallbackPath = path.join(ROOT_PATH, getConfig('i18n.fallbackPath'));
 const defaultLang = find(langConfig, { default: true });
 const langDetector = new LanguageDetector();
+
+const langPath = fs.existsSync(i18nPath) ? i18nPath : fallbackPath;
 
 langDetector.addDetector({
   name: 'CustomLanguageDetector',
@@ -29,7 +35,7 @@ langDetector.addDetector({
 const serverConfig = Object.assign({}, commonConfig, {
   preload: langConfig.map(lang => lang.locale),
   backend: {
-    loadPath: `${path.join(__dirname, '../../i18n')}/{{lng}}/{{ns}}.json`,
+    loadPath: `${langPath}/{{lng}}/{{ns}}.json`,
   },
   detection: {
     order: ['CustomLanguageDetector'],

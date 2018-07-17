@@ -1,4 +1,8 @@
 {
   "env": "production",
-  "graphqlEndpoint": "https://graphql-pokemon.now.sh/"
+  "graphqlEndpoint": "https://graphql-pokemon.now.sh/",
+  "i18n": {
+    "rootPath": "/dist",
+    "fallbackPath": "/src/i18n"
+  }
 }

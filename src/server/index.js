@@ -2,6 +2,7 @@ require('babel-polyfill');
 const express = require('express');
 const webpack = require('webpack'); // eslint-disable-line
 const path = require('path');
+const fs = require('fs');
 const c = require('colors'); // eslint-disable-line
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
@@ -12,15 +13,24 @@ const applyMiddlewares = require('./middlewares/index').default;
 
 const clientConfig = require('../../webpack/client')();
 const serverConfig = require('../../webpack/server')();
+const runnerConfig = require('../../webpack/runner');
 
 const ENV = process.env.NODE_ENV || 'production';
 const PROD_ENV = ENV === 'production';
-const PORT = config.get('port', 3011);
+const PORT = process.env.PORT || config.get('port', 3011);
+const ONLY_BUILD = process.env.ONLY_BUILD === 'true';
+
 let isBuilt = false;
 
 const app = express();
 
+
+
+
 /* eslint-disable */
+/**
+ * Run express Server
+ */
 const done = () => {
   !isBuilt &&
   app.listen(PORT, (err) => {
@@ -35,27 +45,71 @@ const done = () => {
 /* eslint-enable */
 
 
+
+
+/**
+ * Build an Array of apps and return the stats.
+ *
+ * @param {Array} webpackConfig - Array of webpack configs
+ */
+const buildApp = webpackConfig => new Promise((resolve, reject) => {
+  webpack(webpackConfig).run((err, stats) => {
+    if (err) {
+      reject(err);
+    }
+
+    console.log(stats.toString());  // eslint-disable-line
+
+    const clientStats = stats.toJson().children[0];
+    resolve(clientStats);
+  });
+});
+
+
+
+
+/**
+ * Write a Webpack stats object to the dist path as .json
+ *
+ * @param {Object} stats - Webpack stats object
+ */
+const writeFileStats = stats => new Promise((resolve, reject) => {
+  const distPath = path.join(__dirname, '../../dist');
+
+  fs.writeFile(`${distPath}/clientStats.json`, JSON.stringify(stats, null, 2), (err) => {
+    if (err) {
+      console.error('Error to write clientStats file:', err); // eslint-disable-line
+      reject(err);
+    }
+
+    console.log('clientStats.json saved'); // eslint-disable-line
+    resolve();
+  });
+});
+
+
+
+
+/**
+ * Run build process
+ */
 const init = async () => {
   await applyMiddlewares(app);
 
   if (PROD_ENV) {
-    webpack([clientConfig, serverConfig]).run((err, stats) => {
-      if (err) {
-        console.log(c.red('Error in build process:')); // eslint-disable-line
-        console.log(err); // eslint-disable-line
-      }
+    const distPath = path.join(__dirname, '../../dist');
+    app.use(express.static(distPath));
 
-      console.log(stats.toString()); // eslint-disable-line
+    const clientStats = await buildApp([clientConfig, serverConfig]);
 
-      const clientStats = stats.toJson().children[0];
+    if (ONLY_BUILD) {
+      await writeFileStats(clientStats);
+      await buildApp([runnerConfig]);
+    } else {
       const serverRender = require('../../dist/main.prod.js').default; // eslint-disable-line
-
-      const distPath = path.join(__dirname, '../../dist');
-      app.use(express.static(distPath));
-
       app.use(serverRender({ clientStats }));
       done();
-    });
+    }
   } else {
     const compiler = webpack([clientConfig, serverConfig]);
     const clientCompiler = compiler.compilers[0];
@@ -68,5 +122,6 @@ const init = async () => {
     compiler.plugin('done', done);
   }
 };
+
 
 init();

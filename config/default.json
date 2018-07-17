@@ -3,6 +3,8 @@
   "graphqlEndpoint": "https://graphql-pokemon.now.sh/",
   "port": 3011,
   "i18n": {
+    "rootPath": "/src/i18n",
+    "fallbackPath": "/dist",
     "config": {
       "fallbackLng": "es_CL",
       "keySeparator": ":",

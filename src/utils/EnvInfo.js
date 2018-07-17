@@ -1,3 +1,5 @@
+const ROOT_PATH = require('app-root-path').path;
+
 const env = process.env.NODE_ENV;
 const analyze = process.env.ANALYZE;
 
@@ -17,4 +19,4 @@ const isProdEnv = prodEnvs.includes(env);
 const isServer = typeof window === 'undefined';
 const isClient = !isServer;
 
-export { env, isDevEnv, isProdEnv, isClient, isServer, analyze };
+export { env, isDevEnv, isProdEnv, isClient, isServer, analyze, ROOT_PATH };

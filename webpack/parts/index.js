@@ -6,6 +6,7 @@ const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
   const isValidTarget = target === 'client' || target === 'server';
@@ -233,5 +234,11 @@ exports.extensions = () => ({
 exports.bundleAnalyzer = () => ({
   plugins: [
     new BundleAnalyzerPlugin(),
+  ],
+});
+
+exports.copyFiles = (files = []) => ({
+  plugins: [
+    new CopyWebpackPlugin(files),
   ],
 });
