@@ -8,17 +8,10 @@ const serverRender = require('serverRender').default;
 const clientStats = require('clientStats');
 
 const { ROOT_PATH } = require('../utils/EnvInfo');
-// const clientStats = {};
 
 const PORT = process.env.PORT || config.get('port', 3011);
-
 const app = express();
 
-// const serverRender = () => {};
-
-// console.log(clientStats);
-
-c
 
 const init = async () => {
   await applyMiddlewares(app);
@@ -27,10 +20,10 @@ const init = async () => {
 
   app.listen(PORT, (err) => {
     if (err) {
-      console.error(err);
+      console.error(err); // eslint-disable-line
     }
 
-    console.log(c.yellow(`BUILD COMPLETE -- SERVER LISTEN AT PORT ${PORT}`));
+    console.log(c.yellow(`SERVER LISTEN AT PORT ${PORT}`)); // eslint-disable-line
   });
 };
 

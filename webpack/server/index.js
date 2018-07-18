@@ -1,17 +1,62 @@
 const merge = require('webpack-merge');
-const c = require('colors/safe');
+const path = require('path');
+const webpack = require('webpack');
+const fs = require('fs');
+const webpackNodeExternals = require('webpack-node-externals');
 
-const commonConfig = require('./webpack.server.common');
-const devConfig = require('./webpack.server.dev');
-const prodConfig = require('./webpack.server.prod');
+const parts = require('../parts');
 
-module.exports = (env = process.env.NODE_ENV) => {
-  console.log(c.yellow(`SERVER_BUILD_ENV: ${env}`));
+const externals = fs
+  .readdirSync(path.join(__dirname, '../../node_modules'))
+  .filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x))
+  .reduce((externals, mod) => {
+    externals[mod] = `commonjs ${mod}`
+    return externals
+  }, {});
 
-  const envConfig = env === 'production' ? prodConfig : devConfig;
-  const webpackConfig = merge(commonConfig, envConfig);
+externals['react-dom/server'] = 'commonjs react-dom/server';
+externals.serverRender = `commonjs ${path.join(__dirname, '../../dist/main.prod.js')}`;
+externals.clientStats = `commonjs ${path.join(__dirname, '../../dist/clientStats.json')}`;
 
-  // console.log(webpackConfig);
+// console.log(externals);
 
-  return webpackConfig;
+const runnerBaseConfig = {
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+  entry: {
+    runner: path.join(__dirname, '../../src/server/server.js'),
+  },
+  output: {
+    path: path.join(__dirname, '../../dist'),
+    filename: 'index.js',
+    publicPath: path.join(__dirname, '../../dist')
+  },
+  externals,
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        use: 'babel-loader',
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
+
+const config = merge([
+  runnerBaseConfig,
+  // parts.output('server', 'prod'),
+  // parts.devTool('inline-source-map'),
+  parts.uglifyJsPlugin(true),
+  parts.limitChunksQtyPlugin(),
+]);
+
+module.exports = config;

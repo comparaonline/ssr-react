@@ -12,8 +12,8 @@ const config = require('../../config').default;
 const applyMiddlewares = require('./middlewares/index').default;
 
 const clientConfig = require('../../webpack/client')();
-const serverConfig = require('../../webpack/server')();
-const runnerConfig = require('../../webpack/runner');
+const routerConfig = require('../../webpack/router')();
+const serverConfig = require('../../webpack/server');
 
 const ENV = process.env.NODE_ENV || 'production';
 const PROD_ENV = ENV === 'production';
@@ -97,21 +97,21 @@ const init = async () => {
   await applyMiddlewares(app);
 
   if (PROD_ENV) {
-    const distPath = path.join(__dirname, '../../dist');
-    app.use(express.static(distPath));
-
-    const clientStats = await buildApp([clientConfig, serverConfig]);
+    const clientStats = await buildApp([clientConfig, routerConfig]);
 
     if (ONLY_BUILD) {
       await writeFileStats(clientStats);
-      await buildApp([runnerConfig]);
+      await buildApp([serverConfig]);
     } else {
+      const distPath = path.join(__dirname, '../../dist');
       const serverRender = require('../../dist/main.prod.js').default; // eslint-disable-line
+
+      app.use(express.static(distPath));
       app.use(serverRender({ clientStats }));
       done();
     }
   } else {
-    const compiler = webpack([clientConfig, serverConfig]);
+    const compiler = webpack([clientConfig, routerConfig]);
     const clientCompiler = compiler.compilers[0];
     const options = { publicPath: clientConfig.output.publicPath, stats: { colors: true } };
 
