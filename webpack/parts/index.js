@@ -38,6 +38,14 @@ exports.output = (target = 'client', placeholder = '[hash]', folder = '') => {
   return { output: targetOutput };
 };
 
+exports.simpleOutput = (filename = 'index.js', publicPath = '/') => ({
+  output: {
+    path: path.join(__dirname, '../../dist'),
+    filename,
+    publicPath,
+  },
+});
+
 exports.babelLoader = () => ({
   module: {
     rules: [
