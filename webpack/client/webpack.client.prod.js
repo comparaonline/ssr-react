@@ -4,8 +4,9 @@ const parts = require('../parts');
 
 const productionConfig = merge([
   parts.output('client', '[chunkhash]'),
+  parts.mode('production'),
   parts.babelLoader(),
-  parts.commonChunksPlugin(),
+  // parts.splitChunks(),
   parts.uglifyJsPlugin(),
   parts.htmlPlugin(),
   parts.copyFiles([{
@@ -13,6 +14,10 @@ const productionConfig = merge([
     to: path.join(__dirname, '../../dist'),
     ignore: '.gitkeep',
   }]),
+  parts.moduleConcatenationPlugin(),
+  parts.occurenceOrderPlugin(),
+  parts.hashedModuleIdsPlugin(),
+  parts.stats({ warnings: false }),
 ]);
 
 module.exports = productionConfig;

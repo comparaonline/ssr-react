@@ -114,12 +114,13 @@ const init = async () => {
     const compiler = webpack([clientConfig, routerConfig]);
     const clientCompiler = compiler.compilers[0];
     const options = { publicPath: clientConfig.output.publicPath, stats: { colors: true } };
+    const devMiddleware = webpackDevMiddleware(compiler, options);
 
-    app.use(webpackDevMiddleware(compiler, options));
+    app.use(devMiddleware);
     app.use(webpackHotMiddleware(clientCompiler));
     app.use(webpackHotServerMiddleware(compiler));
 
-    compiler.plugin('done', done);
+    devMiddleware.waitUntilValid(done);
   }
 };
 

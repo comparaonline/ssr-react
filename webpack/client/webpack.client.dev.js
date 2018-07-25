@@ -3,9 +3,10 @@ const parts = require('../parts');
 
 const developmentConfig = merge([
   parts.output('client', '[hash]'),
+  parts.mode('development'),
   parts.devTool('inline-source-map'),
   parts.babelLoader(),
-  parts.commonChunksPlugin('[hash]'),
+  // parts.splitChunks('[hash]'),
   parts.writeFilePlugin(),
   parts.hotModuleReplacementPlugin(),
   parts.htmlPlugin(),

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import universal from 'react-universal-component';
 
 import img from 'Assets/img/200.png';
 import 'Assets/css/styles.css';
 
-const UniversalComponent = universal(props => import(`./common/${props.page}`), {
-  minDelay: 200,
-});
+import UniversalComponent from './UniversalComponent';
 
 class App extends Component {
   constructor(props) {
@@ -54,7 +51,7 @@ class App extends Component {
     return (
       <div>
         <h1>Universal Component</h1>
-        <UniversalComponent page={page} />
+        <UniversalComponent page={`common/${page}`} />
         <button onClick={() => this.onClick('Bar')}>Bar</button>
         <button onClick={() => this.onClick('Foo')}>Foo</button>
         <button onClick={() => this.onClick('ApolloBar')}>ApolloBar</button>

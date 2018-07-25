@@ -36,10 +36,12 @@ const runnerBaseConfig = {
 
 const config = merge([
   runnerBaseConfig,
+  parts.mode('production'),
   parts.simpleOutput(),
   parts.babelLoader(),
   parts.uglifyJsPlugin(true),
   parts.limitChunksQtyPlugin(),
+  parts.stats('errors-only'),
 ]);
 
 module.exports = config;

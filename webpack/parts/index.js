@@ -98,14 +98,21 @@ exports.stats = (stats = 'normal') => ({
   stats,
 });
 
-exports.commonChunksPlugin = (placeholder = '[chunkhash]') => ({
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['bootstrap', 'vendor'], // needed to put webpack bootstrap code before chunks
-      filename: `[name].${placeholder}.js`,
-      minChunks: Infinity
-    }),
-  ],
+exports.splitChunks = (placeholder = '[chunkhash]') => ({
+  optimization: {
+    runtimeChunk: {
+      name: 'bootstrap',
+    },
+    splitChunks: {
+      chunks: 'initial',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+        },
+      },
+    },
+  },
 });
 
 exports.hotModuleReplacementPlugin = () => ({
@@ -173,19 +180,18 @@ exports.chunksCssLoader = (target, minimize = true) => {
       rules: [
         {
           test: /\.css$/,
-          use: ExtractCssChunks.extract({
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: true,
-                  localIdentName: '[name]__[local]--[hash:base64:5]',
-                  minimize,
-                },
-              }
-            ],
-          }),
-        }
+          use: [
+            ExtractCssChunks.loader,
+           {
+             loader: 'css-loader',
+             options: {
+               modules: true,
+               localIdentName: '[name]__[local]--[hash:base64:5]',
+               minimize,
+             },
+           },
+          ],
+        },
       ],
     },
     plugins: [
@@ -248,5 +254,27 @@ exports.bundleAnalyzer = () => ({
 exports.copyFiles = (files = []) => ({
   plugins: [
     new CopyWebpackPlugin(files),
+  ],
+});
+
+exports.mode = (mode = 'production') => ({
+  mode,
+});
+
+exports.moduleConcatenationPlugin = () => ({
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+  ],
+});
+
+exports.occurenceOrderPlugin = () => ({
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+  ],
+});
+
+exports.hashedModuleIdsPlugin = () => ({
+  plugins: [
+    new webpack.HashedModuleIdsPlugin(),
   ],
 });
