@@ -17,15 +17,18 @@ const devEntry = [
   'react-hot-loader/patch',
 ];
 
-const entry = {
-  main: isDevEnv ? devEntry.concat(baseEntry) : baseEntry,
-  vendor,
-};
+// const entry = {
+//   main: isDevEnv ? devEntry.concat(baseEntry) : baseEntry,
+//   vendor,
+// };
+
+const entry = isDevEnv ? devEntry.concat(baseEntry) : baseEntry;
 
 const clientCommon = {
   name: 'client',
   target: 'web',
   entry,
+  stats: 'errors-only',
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),

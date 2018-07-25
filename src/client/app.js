@@ -1,7 +1,7 @@
 import React from 'react';
-import AppContainer from 'react-hot-loader/lib/AppContainer';
 import i18n from 'i18next';
 import createHistory from 'history/createBrowserHistory';
+import { AppContainer } from 'react-hot-loader';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
