@@ -67,11 +67,22 @@ exports.htmlPlugin = (layout = 'index.html') => ({
 });
 
 exports.uglifyJsPlugin = (enableSourceMap = false) => ({
-  plugins: [
-    new UglifyJsPlugin({
-      sourceMap: enableSourceMap,
-    }),
-  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: enableSourceMap,
+        uglifyOptions: {
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
+          compress: {
+            comparisons: false
+          },
+        },
+      }),
+    ]
+  },
 });
 
 exports.devTool = (devtool = 'cheap-eval-source-map') => ({
@@ -107,7 +118,7 @@ exports.splitChunks = (placeholder = '[chunkhash]') => ({
       chunks: 'initial',
       cacheGroups: {
         vendor: {
-          test: /[\\/]node_modules[\\/]/,
+          test: 'vendor',
           name: 'vendor',
         },
       },
