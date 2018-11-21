@@ -42,6 +42,7 @@ const config = merge([
   parts.uglifyJsPlugin(true),
   parts.limitChunksQtyPlugin(),
   parts.stats('errors-only'),
+  parts.extensions(),
 ]);
 
 module.exports = config;

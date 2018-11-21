@@ -18,6 +18,7 @@ const productionConfig = merge([
   parts.occurenceOrderPlugin(),
   parts.hashedModuleIdsPlugin(),
   parts.stats({ warnings: false }),
+  parts.extensions(),
 ]);
 
 module.exports = productionConfig;

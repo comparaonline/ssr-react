@@ -51,7 +51,7 @@ exports.babelLoader = () => ({
     rules: [
       {
         use: 'babel-loader',
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
       }
     ],
@@ -253,7 +253,9 @@ exports.loadFonts = ({ include, exclude, options }) => ({
 });
 
 exports.extensions = () => ({
-  extensions: ['.js', '.jsx', '.json'],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+  },
 });
 
 exports.bundleAnalyzer = () => ({
