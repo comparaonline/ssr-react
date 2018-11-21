@@ -9,6 +9,7 @@ const productionConfig = merge([
   parts.limitChunksQtyPlugin(),
   parts.uglifyJsPlugin(true),
   parts.stats({ warnings: false }),
+  parts.extensions(),
 ]);
 
 module.exports = productionConfig;

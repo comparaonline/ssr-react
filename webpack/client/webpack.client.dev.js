@@ -10,6 +10,7 @@ const developmentConfig = merge([
   parts.writeFilePlugin(),
   parts.hotModuleReplacementPlugin(),
   parts.htmlPlugin(),
+  parts.extensions(),
 ]);
 
 module.exports = developmentConfig;

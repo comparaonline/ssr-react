@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import img from 'Assets/img/200.png';
 import 'Assets/css/styles.css';
+import Baz from './common/Baz';
 
 import UniversalComponent from './UniversalComponent';
 
@@ -57,6 +58,8 @@ class App extends Component {
         <button onClick={() => this.onClick('ApolloBar')}>ApolloBar</button>
         <button onClick={() => this.onClick('ApolloFoo')}>ApolloFoo</button>
         <img src={img} alt="" style={{ display: 'block', marginTop: '30px' }} />
+
+        <Baz title="Baz " times={5} />
       </div>
     );
   }
