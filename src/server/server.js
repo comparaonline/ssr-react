@@ -1,4 +1,4 @@
-require('babel-polyfill');
+require('@babel/polyfill');
 const c = require('colors');
 const express = require('express');
 
