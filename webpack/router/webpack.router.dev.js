@@ -7,6 +7,8 @@ const developmentConfig = merge([
   parts.devTool('inline-source-map'),
   parts.limitChunksQtyPlugin(),
   parts.babelLoader(),
+  parts.tsLoader(),
+  parts.extensions(),
 ]);
 
 module.exports = developmentConfig;

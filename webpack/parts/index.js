@@ -58,6 +58,18 @@ exports.babelLoader = () => ({
   },
 });
 
+exports.tsLoader = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+});
+
 exports.htmlPlugin = (layout = 'index.html') => ({
   plugins: [
     new HtmlWebpackPlugin({
@@ -253,7 +265,9 @@ exports.loadFonts = ({ include, exclude, options }) => ({
 });
 
 exports.extensions = () => ({
-  extensions: ['.js', '.jsx', '.json'],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+  },
 });
 
 exports.bundleAnalyzer = () => ({

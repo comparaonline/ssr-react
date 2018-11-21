@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import img from 'Assets/img/200.png';
 import 'Assets/css/styles.css';
+import Dee from './common/Dee';
 
 import UniversalComponent from './UniversalComponent';
 
@@ -57,6 +58,7 @@ class App extends Component {
         <button onClick={() => this.onClick('ApolloBar')}>ApolloBar</button>
         <button onClick={() => this.onClick('ApolloFoo')}>ApolloFoo</button>
         <img src={img} alt="" style={{ display: 'block', marginTop: '30px' }} />
+        <Dee title="baz" times={12} />
       </div>
     );
   }
