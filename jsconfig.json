@@ -11,6 +11,7 @@
       "Layouts/*": ["src/layouts/*"],
       "Assets/*": ["assets/*"],
       "Redux/*": ["src/redux/*"],
+      "Types/*": ["src/types/*"]
     }
   },
   "include": ["**/*.js"],
