@@ -147,6 +147,7 @@ exports.alias = () => ({
       Layouts: path.join(__dirname, '../../src/layouts'),
       Assets: path.join(__dirname, '../../assets'),
       Redux: path.join(__dirname, '../../src/redux'),
+      Types: path.join(__dirname, '../../src/types'),
     },
   },
 });
@@ -174,7 +175,17 @@ exports.cssLoader = () => ({
   module: {
     rules: [
       {
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              modules: true,
+              namedExport: true,
+            },
+          },
+          'css-loader',
+        ],
         test: /\.css$/,
       },
     ],

@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { changeSSR } from 'Redux/actions';
+import { State } from 'Redux/reducers';
 
 import { Title } from './Layout';
 
-import styles from './styles.css';
+import * as styles from './styles.css';
 
-export class Bar extends Component {
-  constructor(props) {
+interface IProps {
+  isSSR: State['isSSR'];
+  changeSSR: (ssr: boolean) => void;
+};
+
+export class Bar extends Component<IProps, {}> {
+  constructor(props: IProps) {
     super(props);
     this.state = {};
   }
@@ -33,13 +38,7 @@ export class Bar extends Component {
   }
 }
 
-Bar.propTypes = {
-  isSSR: PropTypes.bool.isRequired,
-  changeSSR: PropTypes.func.isRequired,
-};
-
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   isSSR: state.isSSR,
 });
 

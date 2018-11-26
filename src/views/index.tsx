@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import img from 'Assets/img/200.png';
 import 'Assets/css/styles.css';
@@ -7,8 +6,20 @@ import Baz from './common/Baz';
 
 import UniversalComponent from './UniversalComponent';
 
-class App extends Component {
-  constructor(props) {
+type Props = {
+  history: {
+    location: {
+      pathname: string;
+    };
+  };
+};
+
+type State = {
+  page: string;
+};
+
+class App extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     const { history } = props;
     const { location: { pathname } } = history;
@@ -40,7 +51,7 @@ class App extends Component {
     this.state = { page };
   }
 
-  onClick = (page) => {
+  onClick = (page: State['page']) => {
     this.setState({
       page,
     });
@@ -64,9 +75,5 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  history: PropTypes.shape({}).isRequired,
-};
 
 export default App;

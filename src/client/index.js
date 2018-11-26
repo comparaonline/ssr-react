@@ -11,8 +11,8 @@ const render = (app) => {
 };
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('../views/index.js', () => {
-    const _AppComponent = require('../views/index').default; // eslint-disable-line
+  module.hot.accept('../views/index.tsx', () => {
+    const _AppComponent = require('../views/index.tsx').default; // eslint-disable-line
     const app = buildApp(_AppComponent);
 
     render(app);

@@ -5,10 +5,18 @@ import { flushChunkNames, clearChunks } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 import { getInitialLanguage, getInitialState } from 'Utils/I18nSSR';
 import layout from 'Layouts';
+import { Request, Response } from 'Types/express';
+import { ClientStats } from 'Types/clientStats';
 
 import buildApp from './app';
 
-export default async (data) => {
+export interface IData {
+  req: Request;
+  res: Response;
+  clientStats: ClientStats;
+};
+
+export default async (data: IData): Promise<string> => {
   try {
     const { clientStats, req } = data;
 
