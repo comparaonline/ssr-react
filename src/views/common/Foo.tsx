@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 
-class Foo extends Component {
-  constructor(props) {
+interface IProps {
+  t: (param: string) => string;
+};
+
+class Foo extends Component<IProps, {}> {
+  constructor(props: IProps) {
     super(props);
     this.state = {};
   }
@@ -24,8 +27,5 @@ class Foo extends Component {
   }
 }
 
-Foo.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default translate()(Foo);
