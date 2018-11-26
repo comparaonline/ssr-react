@@ -1,4 +1,6 @@
-export default (config) => {
+import { Layout } from 'Types/layout';
+
+export const layout: Layout = (config) => {
   const {
     js,
     helmet,
