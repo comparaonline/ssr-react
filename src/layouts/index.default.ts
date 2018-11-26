@@ -1,4 +1,6 @@
-export default (config) => {
+import { Layout } from 'Types/layout';
+
+export const layout: Layout = (config) => {
   const {
     js,
     helmet,
@@ -25,7 +27,7 @@ export default (config) => {
       ${helmet.link.toString()}
     </head>
     <body ${helmet.bodyAttributes.toString()}>
-      <h1>AMP Template</h1>
+      <h1>Default Template</h1>
       <div id="root">${content}</div>
       <script>
         window.__REDUX_STATE__ = ${JSON.stringify(reduxInitialState).replace(/</g, '\\u003c')};

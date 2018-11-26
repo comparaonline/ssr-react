@@ -4,7 +4,8 @@ import { ServerStyleSheet } from 'styled-components';
 import { flushChunkNames, clearChunks } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 import { getInitialLanguage, getInitialState } from 'Utils/I18nSSR';
-import layout from 'Layouts';
+import layout, { Layout } from 'Layouts/index';
+import { IConfigLayout } from 'Types/layout';
 import { Request, Response } from 'Types/express';
 import { ClientStats } from 'Types/clientStats';
 
@@ -32,13 +33,13 @@ export default async (data: IData): Promise<string> => {
 
     clearChunks();
 
-    const sheet = new ServerStyleSheet();
-    const content = renderToString(sheet.collectStyles(app));
+    const sheet: ServerStyleSheet = new ServerStyleSheet();
+    const content: string = renderToString(sheet.collectStyles(app));
 
-    const chunkNames = flushChunkNames();
+    const chunkNames: string[] = flushChunkNames();
     const chunks = flushChunks(clientStats, { chunkNames });
 
-    const layoutConfig = Object.assign({}, chunks, {
+    const layoutConfig: IConfigLayout = Object.assign({}, chunks, {
       content,
       apolloInitialState,
       helmet: helmetStore.renderStatic(),
@@ -48,7 +49,7 @@ export default async (data: IData): Promise<string> => {
       i18nInitialLanguage: getInitialLanguage(req),
     });
 
-    const html = layout(layoutConfig, 'default');
+    const html: string = layout(layoutConfig, Layout.default);
     return html;
   } catch (err) {
     console.log(err); // eslint-disable-line
