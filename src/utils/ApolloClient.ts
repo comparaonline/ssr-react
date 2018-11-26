@@ -8,7 +8,7 @@ if (!global.fetch) {
   global.fetch = fetch;
 }
 
-export const createApolloClientSSR = () => (
+export const createApolloClientSSR = (): ApolloClient<any> => (
   new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
