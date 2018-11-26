@@ -6,7 +6,7 @@ const merge = require('webpack-merge');
 const { env, isProdEnv, isDevEnv } = require('../../src/utils/EnvInfo');
 const parts = require('../parts');
 
-const baseEntry = [path.join(__dirname, '../../src/server/router.js')];
+const baseEntry = [path.join(__dirname, '../../src/server/router.ts')];
 const devEntry = ['regenerator-runtime/runtime.js'];
 const entry = isDevEnv ? devEntry.concat(baseEntry) : baseEntry;
 
