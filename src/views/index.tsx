@@ -6,7 +6,7 @@ import Baz from './common/Baz';
 
 import UniversalComponent from './UniversalComponent';
 
-type Props = {
+export type Props = {
   history: {
     location: {
       pathname: string;
@@ -14,11 +14,11 @@ type Props = {
   };
 };
 
-type State = {
+export type State = {
   page: string;
 };
 
-class App extends React.Component<Props, State> {
+export class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const { history } = props;
