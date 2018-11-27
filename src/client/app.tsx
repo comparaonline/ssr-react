@@ -8,6 +8,7 @@ import { ApolloProvider } from 'react-apollo';
 import { createApolloClient } from 'Utils/ApolloClient';
 import { configureStore } from 'Utils/ReduxSetup';
 import { get } from 'Config';
+import AppClass from 'Views/index';
 
 
 const history = createHistory();
@@ -21,7 +22,7 @@ window.i18n = i18n.init(i18nConfig);
 delete window.__REDUX_STATE__;
 delete window.__APOLLO_STATE__;
 
-export default (App) => {
+export default (App: typeof AppClass): JSX.Element => {
   const AppComponent = (
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
