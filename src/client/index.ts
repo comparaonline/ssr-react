@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import App from 'Views';
+import App from 'Views/index';
 
 import buildApp from './app';
 
@@ -11,7 +11,7 @@ const render = (app) => {
 };
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('../views/index.tsx', () => {
+    module.hot.accept('../views/index.tsx', () => {
     const _AppComponent = require('../views/index.tsx').default; // eslint-disable-line
     const app = buildApp(_AppComponent);
 
