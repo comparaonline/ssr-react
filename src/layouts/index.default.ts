@@ -7,6 +7,7 @@ export const layout: Layout = (config) => {
     styles,
     cssHash,
     content,
+    materialCSS,
     styleTags,
     reduxInitialState,
     apolloInitialState,
@@ -27,8 +28,8 @@ export const layout: Layout = (config) => {
       ${helmet.link.toString()}
     </head>
     <body ${helmet.bodyAttributes.toString()}>
-      <h1>Default Template</h1>
       <div id="root">${content}</div>
+      <style id="jss-server-side">${materialCSS}</style>
       <script>
         window.__REDUX_STATE__ = ${JSON.stringify(reduxInitialState).replace(/</g, '\\u003c')};
         window.__APOLLO_STATE__ = ${JSON.stringify(apolloInitialState).replace(/</g, '\\u003c')};
