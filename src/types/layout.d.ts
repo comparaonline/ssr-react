@@ -8,6 +8,7 @@ export interface IConfigLayout {
   styles: any;
   cssHash: any;
   content: string;
+  materialCSS: string;
   styleTags: string;
   reduxInitialState: State;
   apolloInitialState: any;
