@@ -14,12 +14,12 @@
     "build:router:dev": "cross-env NODE_ENV=development webpack --config webpack/router/index.js",
     "build:router:prod": "cross-env NODE_ENV=production webpack -p --config webpack/router/index.js",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack/server/index.js",
-    "build": "npm run clean && cross-env NODE_ENV=production ONLY_BUILD=true babel-node src/server/index.js",
+    "build": "npm run clean && cross-env NODE_ENV=production ONLY_BUILD=true babel-node src/scripts/index.js",
     "start:spa:server": "http-server-spa dist",
-    "start:dev": "npm run clean && cross-env NODE_ENV=development babel-node src/server/index.js",
-    "start:prod": "npm run clean && cross-env NODE_ENV=production babel-node src/server/index.js",
-    "analyze:dev": "npm run clean && cross-env NODE_ENV=development ANALYZE=true babel-node src/server/index.js",
-    "analyze:prod": "npm run clean && cross-env NODE_ENV=production ANALYZE=true babel-node src/server/index.js"
+    "start:dev": "npm run clean && cross-env NODE_ENV=development babel-node src/scripts/index.js",
+    "start:prod": "npm run clean && cross-env NODE_ENV=production babel-node src/scripts/index.js",
+    "analyze:dev": "npm run clean && cross-env NODE_ENV=development ANALYZE=true babel-node src/scripts/index.js",
+    "analyze:prod": "npm run clean && cross-env NODE_ENV=production ANALYZE=true babel-node src/scripts/index.js"
   },
   "keywords": [
     "react",
