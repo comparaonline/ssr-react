@@ -9,7 +9,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disabl
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware'); // eslint-disable-line
 
 const config = require('../../config').default;
-const applyMiddlewares = require('./middlewares/index').default;
+const applyMiddlewares = require('../server/middlewares/index').default;
 
 const clientConfig = require('../../webpack/client')();
 const routerConfig = require('../../webpack/router')();
