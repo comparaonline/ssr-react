@@ -26,6 +26,7 @@ export default async (data: IData): Promise<string> => {
       store,
       helmetStore,
       apolloClientSSR,
+      sheetsRegistry,
     } = buildApp(req);
 
     await getDataFromTree(app);
@@ -38,10 +39,12 @@ export default async (data: IData): Promise<string> => {
 
     const chunkNames: string[] = flushChunkNames();
     const chunks = flushChunks(clientStats, { chunkNames });
+    const materialCSS: string = sheetsRegistry.toString();
 
     const layoutConfig: IConfigLayout = Object.assign({}, chunks, {
       content,
       apolloInitialState,
+      materialCSS,
       helmet: helmetStore.renderStatic(),
       styleTags: sheet.getStyleTags(),
       reduxInitialState: store.getState(),
