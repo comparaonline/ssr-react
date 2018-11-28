@@ -10,6 +10,11 @@ import { Store, State } from 'Redux/reducers';
 import { Request } from '../types/express';
 import { ApolloClient } from 'apollo-client';
 
+import { SheetsRegistry } from 'jss';
+import JssProvider from 'react-jss/lib/JssProvider';
+import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+
 import App from '../views';
 
 export interface IApp {
@@ -18,6 +23,7 @@ export interface IApp {
   history: any;
   helmetStore: any;
   apolloClientSSR: ApolloClient<any>;
+  sheetsRegistry: SheetsRegistry;
 };
 
 export default (req: Request): IApp => {
@@ -27,12 +33,28 @@ export default (req: Request): IApp => {
   const store: Store = configureStore(initialState);
   const helmetStore = createHelmetStore();
 
+  // MUI Setup
+  const sheetsRegistry = new SheetsRegistry();
+  const sheetsManager = new Map();
+  const theme = createMuiTheme({
+    palette: {
+      primary: blue,
+      type: 'light'
+    }
+  });
+
+  const generateClassName = createGenerateClassName();
+
   const app = (
     <Provider store={store}>
       <ApolloProvider client={apolloClientSSR}>
         <I18nextProvider i18n={req.i18n}>
           <HelmetProvider store={helmetStore}>
-            <App history={history} />
+            <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
+              <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
+                <App history={history} />
+              </MuiThemeProvider>
+            </JssProvider>
           </HelmetProvider>
         </I18nextProvider>
       </ApolloProvider>
@@ -45,5 +67,6 @@ export default (req: Request): IApp => {
     history,
     helmetStore,
     apolloClientSSR,
+    sheetsRegistry,
   };
 };

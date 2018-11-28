@@ -5,6 +5,9 @@ import { AppContainer } from 'react-hot-loader';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
+import JssProvider from 'react-jss/lib/JssProvider';
+import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
 import { createApolloClient } from 'Utils/ApolloClient';
 import { configureStore } from 'Utils/ReduxSetup';
 import { get } from 'Config';
@@ -22,7 +25,29 @@ window.i18n = i18n.init(i18nConfig);
 delete window.__REDUX_STATE__;
 delete window.__APOLLO_STATE__;
 
+class Main extends React.Component {
+  componentDidMount() {
+    const jssStyles = document.getElementById('jss-server-side');
+
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
 export default (App: typeof AppClass): JSX.Element => {
+  const generateClassName = createGenerateClassName();
+  const theme = createMuiTheme({
+    palette: {
+      primary: blue,
+      type: 'light'
+    }
+  });
+
   const AppComponent = (
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
@@ -31,7 +56,13 @@ export default (App: typeof AppClass): JSX.Element => {
           initialI18nStore={window.__I18N_STATE__}
           initialLanguage={window.__I18N_LANGUAGE__}
         >
-          <App history={history} />
+          <JssProvider generateClassName={generateClassName}>
+            <MuiThemeProvider theme={theme}>
+              <Main>
+                <App history={history} />
+              </Main>
+            </MuiThemeProvider>
+          </JssProvider>
         </I18nextProvider>
       </ApolloProvider>
     </Provider>
