@@ -24,7 +24,7 @@ const runnerBaseConfig = {
     __filename: false,
   },
   entry: {
-    runner: path.join(__dirname, '../../src/server/server.js'),
+    runner: path.join(__dirname, '../../src/scripts/server.js'),
   },
   externals,
   plugins: [
