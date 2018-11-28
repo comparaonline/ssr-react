@@ -3,7 +3,7 @@ const c = require('colors');
 const express = require('express');
 
 const config = require('../../config').default;
-const applyMiddlewares = require('./middlewares/index').default;
+const applyMiddlewares = require('../server/middlewares/index').default;
 const serverRender = require('serverRender').default;
 const clientStats = require('clientStats');
 
