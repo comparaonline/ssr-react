@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { changeSSR } from 'Redux/actions';
 import { State } from 'Redux/reducers';
@@ -29,10 +31,18 @@ export class Bar extends Component<IProps, {}> {
   render() {
     return (
       <div className={styles.tanBG}>
-        <Title>Bar component loaded</Title>
-        <span>this is an async component</span>
-        <div>isSSR: {this.props.isSSR.toString()}</div>
-        <button onClick={this.onClick} className={styles.changeStateButton}>change state</button>
+        <Grid container spacing={16} justify="center">
+          <Grid item>
+            <Title>Bar component loaded</Title>
+            <span>this is an async component</span>
+            <div>isSSR: {this.props.isSSR.toString()}</div>
+            <Grid container spacing={16} justify="center">
+              <Grid item>
+                <Button variant="contained" color="secondary" onClick={this.onClick} className={styles.changeStateButton}>change state</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
     );
   }
