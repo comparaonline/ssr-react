@@ -1,15 +1,15 @@
 import { State } from 'Redux/reducers';
 import { i18n } from 'Types/i18n';
 import { Ii18n } from '../server/middlewares/i18next';
+import { LazyLoadedString } from 'webpack-flush-chunks';
 
 export interface IConfigLayout {
-  js: string[];
+  js: LazyLoadedString;
   helmet: any;
   styles: any;
   cssHash: any;
   content: string;
   materialCSS: string;
-  styleTags: string;
   reduxInitialState: State;
   apolloInitialState: any;
   i18nInitialState: Partial<i18n>;

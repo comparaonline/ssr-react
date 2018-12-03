@@ -1,6 +1,5 @@
 import { getDataFromTree } from 'react-apollo';
 import { renderToString } from 'react-dom/server';
-import { ServerStyleSheet } from 'styled-components';
 import { flushChunkNames, clearChunks } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 import { getInitialLanguage, getInitialState } from 'Utils/I18nSSR';
@@ -34,8 +33,7 @@ export default async (data: IData): Promise<string> => {
 
     clearChunks();
 
-    const sheet: ServerStyleSheet = new ServerStyleSheet();
-    const content: string = renderToString(sheet.collectStyles(app));
+    const content: string = renderToString(app);
 
     const chunkNames: string[] = flushChunkNames();
     const chunks = flushChunks(clientStats, { chunkNames });
@@ -46,7 +44,6 @@ export default async (data: IData): Promise<string> => {
       apolloInitialState,
       materialCSS,
       helmet: helmetStore.renderStatic(),
-      styleTags: sheet.getStyleTags(),
       reduxInitialState: store.getState(),
       i18nInitialState: getInitialState(req),
       i18nInitialLanguage: getInitialLanguage(req),
