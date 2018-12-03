@@ -6,12 +6,12 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 import JssProvider from 'react-jss/lib/JssProvider';
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
+import { MuiThemeProvider, createGenerateClassName, Theme } from '@material-ui/core/styles';
 import { createApolloClient } from 'Utils/ApolloClient';
 import { configureStore } from 'Utils/ReduxSetup';
+import { RemoveStylesOnClient, createTheme } from 'Utils/MaterialUI';
 import { get } from 'Config';
-import { App as AppClass } from 'Views/index';
+import AppClass from 'Views/index';
 
 
 const apolloClient = createApolloClient(window.__APOLLO_STATE__);
@@ -24,31 +24,9 @@ window.i18n = i18n.init(i18nConfig);
 delete window.__REDUX_STATE__;
 delete window.__APOLLO_STATE__;
 
-class Main extends React.Component {
-  componentDidMount() {
-    const jssStyles = document.getElementById('jss-server-side');
-
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
-
 export default (App: typeof AppClass): JSX.Element => {
   const generateClassName = createGenerateClassName();
-  const theme = createMuiTheme({
-    typography: {
-      useNextVariants: true,
-    },
-    palette: {
-      primary: blue,
-      type: 'light'
-    }
-  });
+  const theme: Theme = createTheme();
 
   const AppComponent = (
     <Provider store={store}>
@@ -60,11 +38,11 @@ export default (App: typeof AppClass): JSX.Element => {
         >
           <JssProvider generateClassName={generateClassName}>
             <MuiThemeProvider theme={theme}>
-              <Main>
+              <RemoveStylesOnClient>
                 <BrowserRouter>
                   <App />
                 </BrowserRouter>
-              </Main>
+              </RemoveStylesOnClient>
             </MuiThemeProvider>
           </JssProvider>
         </I18nextProvider>

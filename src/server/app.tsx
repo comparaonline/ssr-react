@@ -9,11 +9,10 @@ import { Store, State } from 'Redux/reducers';
 import { Request } from '../types/express';
 import { ApolloClient } from 'apollo-client';
 import { StaticRouter } from 'react-router-dom';
-
 import { SheetsRegistry } from 'jss';
 import JssProvider from 'react-jss/lib/JssProvider';
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
+import { MuiThemeProvider, Theme, createGenerateClassName } from '@material-ui/core/styles';
+import { createTheme } from 'Utils/MaterialUI';
 
 import App from '../views';
 
@@ -35,15 +34,7 @@ export default (req: Request): IApp => {
 
   const sheetsRegistry = new SheetsRegistry();
   const sheetsManager = new Map();
-  const theme = createMuiTheme({
-    typography: {
-      useNextVariants: true,
-    },
-    palette: {
-      primary: blue,
-      type: 'light'
-    }
-  });
+  const theme: Theme = createTheme();
 
   const generateClassName = createGenerateClassName();
 
