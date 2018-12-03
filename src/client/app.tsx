@@ -41,6 +41,9 @@ class Main extends React.Component {
 export default (App: typeof AppClass): JSX.Element => {
   const generateClassName = createGenerateClassName();
   const theme = createMuiTheme({
+    typography: {
+      useNextVariants: true,
+    },
     palette: {
       primary: blue,
       type: 'light'

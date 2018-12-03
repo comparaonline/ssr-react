@@ -36,6 +36,9 @@ export default (req: Request): IApp => {
   const sheetsRegistry = new SheetsRegistry();
   const sheetsManager = new Map();
   const theme = createMuiTheme({
+    typography: {
+      useNextVariants: true,
+    },
     palette: {
       primary: blue,
       type: 'light'
