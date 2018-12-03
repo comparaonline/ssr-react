@@ -1,6 +1,6 @@
-const merge = require('lodash/merge');
-const _get = require('lodash/get');
-const _has = require('lodash/has');
+const merge = require('lodash.merge');
+const _get = require('lodash.get');
+const _has = require('lodash.has');
 
 const extendObject = require('./extend').default;
 
