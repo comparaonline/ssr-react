@@ -6,16 +6,13 @@ import render from './render';
 
 export default ({ clientStats }: { clientStats: ClientStats }): Router => {
   const router = Router();
-  console.log('here');
 
   router.get('/home', async (req: Request, res: Response): Promise<void> => {
-    console.log('here');
     const html: string = await render({ clientStats, req, res });
     res.send(html);
   });
 
   router.get('/route/a', async (req: Request, res: Response): Promise<void> => {
-    console.log('route a');
     const html = await render({ clientStats, req, res });
     res.send(html);
   });
