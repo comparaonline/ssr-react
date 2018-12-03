@@ -1,4 +1,5 @@
 import { Layout } from 'Types/layout';
+import { jssID } from 'Utils/MaterialUI';
 
 export const layout: Layout = (config) => {
   const {
@@ -27,7 +28,7 @@ export const layout: Layout = (config) => {
     </head>
     <body ${helmet.bodyAttributes.toString()}>
       <div id="root">${content}</div>
-      <style id="jss-server-side">${materialCSS}</style>
+      <style id="${jssID}">${materialCSS}</style>
       <script>
         window.__REDUX_STATE__ = ${JSON.stringify(reduxInitialState).replace(/</g, '\\u003c')};
         window.__APOLLO_STATE__ = ${JSON.stringify(apolloInitialState).replace(/</g, '\\u003c')};
