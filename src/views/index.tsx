@@ -8,10 +8,11 @@ import HomeIcon from '@material-ui/icons/Home';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import { Switch, Route, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import img from 'Assets/img/200.png';
 import 'Assets/css/styles.css';
-import Baz from './common/Baz';
+
 
 import UniversalComponent from './UniversalComponent';
 
@@ -42,7 +43,7 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-export type Props = {
+export interface Props extends RouteComponentProps {
   classes: {
     appBar: string;
     icon: string;
@@ -52,66 +53,33 @@ export type Props = {
     card: string;
     bottom: string;
   };
-  history: {
-    location: {
-      pathname: string;
-    };
-  };
 };
 
-export type State = {
-  page: string;
-};
-
-export class App extends React.Component<Props, State> {
+export class AppComponent extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-    const { history } = props;
-    const { location: { pathname } } = history;
-
-    let page = null;
-
-    switch (pathname) {
-      case '/route/c':
-        page = 'Bar';
-        break;
-
-      case '/route/d':
-        page = 'Foo';
-        break;
-
-      case '/route/apollo/a':
-        page = 'ApolloBar';
-        break;
-
-      case '/route/apollo/b':
-        page = 'ApolloFoo';
-        break;
-
-      default:
-        page = 'Bar';
-        break;
-    }
-
-    this.state = { page };
   }
 
-  onClick = (page: State['page']) => {
-    this.setState({
-      page,
-    });
+  onClick = (route: string) => {
+    const { history } = this.props;
+    history.push(route);
   }
 
   render() {
-    const { page } = this.state;
     const { classes } = this.props;
 
     const buttons: JSX.Element[] = [
-      <Button variant="contained" color="primary" onClick={() => this.onClick('Bar')}>Bar</Button>,
-      <Button variant="contained" color="primary" onClick={() => this.onClick('Foo')}>Foo</Button>,
-      <Button variant="contained" color="primary" onClick={() => this.onClick('ApolloBar')}>ApolloBar</Button>,
-      <Button variant="contained" color="primary" onClick={() => this.onClick('ApolloFoo')}>ApolloFoo</Button>,
+      <Button variant="contained" color="primary" onClick={() => this.onClick('/route/a')}>Bar</Button>,
+      <Button variant="contained" color="primary" onClick={() => this.onClick('/route/b')}>Foo</Button>,
+      <Button variant="contained" color="primary" onClick={() => this.onClick('/route/apollo/a')}>ApolloBar</Button>,
+      <Button variant="contained" color="primary" onClick={() => this.onClick('/route/apollo/b')}>ApolloFoo</Button>,
     ];
+
+    const Root: React.SFC = () => <UniversalComponent page="common/Root" />
+    const Bar: React.SFC = () => <UniversalComponent page="common/Bar" />;
+    const Foo: React.SFC = () => <UniversalComponent page="common/Foo" />;
+    const ApolloA: React.SFC = () => <UniversalComponent page="common/ApolloBar" />;
+    const ApolloB: React.SFC = () => <UniversalComponent page="common/ApolloFoo" />
 
     return (
       <React.Fragment>
@@ -144,10 +112,17 @@ export class App extends React.Component<Props, State> {
           <Grid container spacing={16} justify="center">
             <Grid item>
               <Card className={classes.card}>
-                <UniversalComponent page={`common/${page}`} />
+                <Switch>
+                  <Route path="/home" component={Root} exact />
+                  <Route path="/route/a" component={Bar} exact/>
+                  <Route path="/route/b" component={Foo} exact/>
+                  <Route path="/route/apollo/a" component={ApolloA} exact/>
+                  <Route path="/route/apollo/b" component={ApolloB} exact/>
+                </Switch>
               </Card>
             </Grid>
           </Grid>
+
           <Grid container spacing={16} justify="center">
             <Grid item>
               <img src={img} alt="" style={{ display: 'block', marginTop: '30px' }} />
@@ -168,4 +143,4 @@ export class App extends React.Component<Props, State> {
   }
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(withRouter(AppComponent));

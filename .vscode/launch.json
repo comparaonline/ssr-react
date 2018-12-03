@@ -12,12 +12,12 @@
           "type": "node",
           "request": "launch",
           "name": "Iniciar programa",
-          "program": "${workspaceRoot}/src/server/index.js",
+          "program": "${workspaceRoot}/src/scripts/index.js",
           "cwd": "${workspaceRoot}",
           "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
           "env": {
             "NODE_ENV": "development",
-            "PORT": "3011"
+            "PORT": "3010"
           },
           "sourceMaps": true
       }

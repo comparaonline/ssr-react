@@ -6,21 +6,21 @@ import render from './render';
 
 export default ({ clientStats }: { clientStats: ClientStats }): Router => {
   const router = Router();
+  console.log('here');
 
-  router.get('/route/a', (req: Request, res: Response): void => {
-    res.send({ message: 'route A' });
+  router.get('/home', async (req: Request, res: Response): Promise<void> => {
+    console.log('here');
+    const html: string = await render({ clientStats, req, res });
+    res.send(html);
   });
 
-  router.get('/route/b', (req: Request, res: Response): void => {
-    res.send({ message: 'route B' });
-  });
-
-  router.get('/route/c', async (req: Request, res: Response): Promise<void> => {
+  router.get('/route/a', async (req: Request, res: Response): Promise<void> => {
+    console.log('route a');
     const html = await render({ clientStats, req, res });
     res.send(html);
   });
 
-  router.get('/route/d', async (req: Request, res: Response): Promise<void> => {
+  router.get('/route/b', async (req: Request, res: Response): Promise<void> => {
     const html = await render({ clientStats, req, res });
     res.send(html);
   });
