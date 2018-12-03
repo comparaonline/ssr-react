@@ -10,7 +10,7 @@
           "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
           "env": {
             "NODE_ENV": "development",
-            "PORT": "3010"
+            "PORT": "3011"
           },
           "sourceMaps": true
       }
