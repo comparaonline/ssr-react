@@ -3,12 +3,12 @@ import { ApolloProvider } from 'react-apollo';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { HelmetProvider, createHelmetStore } from 'react-safety-helmet';
-import createHistory from 'history/createMemoryHistory';
 import { createApolloClientSSR } from 'Utils/ApolloClient';
 import { getInitialState, configureStore } from 'Utils/ReduxSetup';
 import { Store, State } from 'Redux/reducers';
 import { Request } from '../types/express';
 import { ApolloClient } from 'apollo-client';
+import { StaticRouter } from 'react-router-dom';
 
 import { SheetsRegistry } from 'jss';
 import JssProvider from 'react-jss/lib/JssProvider';
@@ -20,7 +20,6 @@ import App from '../views';
 export interface IApp {
   app: JSX.Element;
   store: Store;
-  history: any;
   helmetStore: any;
   apolloClientSSR: ApolloClient<any>;
   sheetsRegistry: SheetsRegistry;
@@ -28,12 +27,12 @@ export interface IApp {
 
 export default (req: Request): IApp => {
   const apolloClientSSR: ApolloClient<any> = createApolloClientSSR();
-  const history = createHistory({ initialEntries: [req.path] });
   const initialState: State = getInitialState({ req });
   const store: Store = configureStore(initialState);
   const helmetStore = createHelmetStore();
 
-  // MUI Setup
+  const context: object = {};
+
   const sheetsRegistry = new SheetsRegistry();
   const sheetsManager = new Map();
   const theme = createMuiTheme({
@@ -52,7 +51,9 @@ export default (req: Request): IApp => {
           <HelmetProvider store={helmetStore}>
             <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
               <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
-                <App history={history} />
+                <StaticRouter location={req.url} context={context}>
+                  <App />
+                </StaticRouter>
               </MuiThemeProvider>
             </JssProvider>
           </HelmetProvider>
@@ -64,7 +65,6 @@ export default (req: Request): IApp => {
   return {
     app,
     store,
-    history,
     helmetStore,
     apolloClientSSR,
     sheetsRegistry,
