@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from 'i18next';
-import createHistory from 'history/createBrowserHistory';
+import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -11,10 +11,9 @@ import blue from '@material-ui/core/colors/blue';
 import { createApolloClient } from 'Utils/ApolloClient';
 import { configureStore } from 'Utils/ReduxSetup';
 import { get } from 'Config';
-import AppClass from 'Views/index';
+import { App as AppClass } from 'Views/index';
 
 
-const history = createHistory();
 const apolloClient = createApolloClient(window.__APOLLO_STATE__);
 const store = configureStore(window.__REDUX_STATE__);
 const i18nConfig = get('i18n.config');
@@ -59,7 +58,9 @@ export default (App: typeof AppClass): JSX.Element => {
           <JssProvider generateClassName={generateClassName}>
             <MuiThemeProvider theme={theme}>
               <Main>
-                <App history={history} />
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
               </Main>
             </MuiThemeProvider>
           </JssProvider>
