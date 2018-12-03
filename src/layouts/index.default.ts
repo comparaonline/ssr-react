@@ -8,7 +8,6 @@ export const layout: Layout = (config) => {
     cssHash,
     content,
     materialCSS,
-    styleTags,
     reduxInitialState,
     apolloInitialState,
     i18nInitialState,
@@ -20,7 +19,6 @@ export const layout: Layout = (config) => {
     <head>
       <meta charset="utf-8">
       <title>react-universal-component-boilerplate</title>
-      ${styleTags}
       ${styles}
 
       ${helmet.title.toString()}

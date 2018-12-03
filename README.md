@@ -2,12 +2,12 @@
 
 - [Description](#description)
 - [Features](#features)
-- [Folder structure](#folder-structure)
+- [Folder Structure](#folder-structure)
 - [Installation](#installation)
 - [Setup](#setup)
-- [Available commands](#available-commands)
+- [Available Commands](#available-commands)
 - [Notes](#notes)
-- [Next steps](#next-steps)
+- [Next Steps](#next-steps)
 
 
 
@@ -25,7 +25,6 @@ React-SSR supports the follow features:
 - GraphQL (with Apollo)
 - Async Components (with react universal components)
 - Async CSS (with react universal components)
-- Styled Components
 - Testing environment (with Jest)
 - i18n (with i18next)
 - Javascript bundle splitting
