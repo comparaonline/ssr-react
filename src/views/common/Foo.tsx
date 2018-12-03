@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import React from 'react';
+import { withNamespaces, WithNamespaces } from 'react-i18next';
 
-interface IProps {
-  t: (param: string) => string;
-};
-
-class Foo extends Component<IProps, {}> {
-  constructor(props: IProps) {
+class Foo extends React.Component<WithNamespaces> {
+  constructor(props: WithNamespaces) {
     super(props);
     this.state = {};
   }
@@ -28,4 +24,4 @@ class Foo extends Component<IProps, {}> {
 }
 
 
-export default translate()(Foo);
+export default withNamespaces()(Foo);
