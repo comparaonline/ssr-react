@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import i18nMiddleware, { LanguageDetector } from 'i18next-express-middleware';
 import i18nextBackend from 'i18next-node-fs-backend';
-import { find } from 'lodash';
+import find from 'lodash.find';
 import { get as getConfig } from '../../../config';
 import { ROOT_PATH } from '../../utils/EnvInfo';
 

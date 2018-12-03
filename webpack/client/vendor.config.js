@@ -1,6 +1,6 @@
 
-const keys = require('lodash/keys');
-const without = require('lodash/without');
+const keys = require('lodash.keys');
+const without = require('lodash.without');
 const pkg = require('../../package.json');
 
 const EXCLUDE_LIBS = [
