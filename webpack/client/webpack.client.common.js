@@ -7,20 +7,16 @@ const {
   isProdEnv,
   isDevEnv,
   analyze,
+  spaMode,
 } = require('../../src/utils/EnvInfo');
-const vendor = require('./vendor.config');
+
 const parts = require('../parts');
 
 const baseEntry = [path.join(__dirname, '../../src/client/index.ts')];
-const devEntry = [
+const devEntry = spaMode ? [] : [
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
   'react-hot-loader/patch',
 ];
-
-// const entry = {
-//   main: isDevEnv ? devEntry.concat(baseEntry) : baseEntry,
-//   vendor,
-// };
 
 const entry = isDevEnv ? devEntry.concat(baseEntry) : baseEntry;
 
@@ -32,6 +28,7 @@ const clientCommon = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
+      'process.env.SPA_MODE': spaMode,
     }),
   ],
 };

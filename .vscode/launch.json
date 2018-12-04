@@ -6,7 +6,8 @@
           "request": "launch",
           "name": "Launch Chrome",
           "url": "http://localhost:3011",
-          "webRoot": "${workspaceFolder}/src"
+          "webRoot": "${workspaceFolder}/src",
+          "sourceMaps": true
       },
       {
           "type": "node",
