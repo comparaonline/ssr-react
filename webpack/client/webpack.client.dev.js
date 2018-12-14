@@ -6,7 +6,6 @@ const developmentConfig = merge([
   parts.mode('development'),
   parts.devTool('inline-source-map'),
   parts.babelLoader(),
-  // parts.splitChunks('[hash]'),
   parts.writeFilePlugin(),
   parts.hotModuleReplacementPlugin(),
   parts.htmlPlugin(),
